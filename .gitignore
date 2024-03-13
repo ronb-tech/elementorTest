@@ -5,17 +5,17 @@
 
 # Environment variables
 BackEnd/.env
-FE/.env.local
-FE/.env.production
-FE/.env.development
+front-end/.env.local
+front-end/.env.production
+front-ent/.env.development
 
 # Dependencies
 BackEnd/node_modules/
-FE/node_modules/
+front-end/node_modules/
 
 # Production build folder for FrontEnd
-FE/build/
-FE/dist/
+front-end/build/
+front-end/dist/
 
 # Optional: IDE specific settings
 .vscode/

@@ -1,0 +1,23 @@
+@import "./main.scss";
+
+.page-photos {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-lg;
+
+    .slider-container {
+        width: 100%;
+        margin: auto;
+        min-height: 300px;
+        height: 500px;
+
+        .img-slider {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

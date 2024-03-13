@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { User } from "../utils/types";
 import { userServiceLogic } from "../services/index";
+import UsersList from "../components/usersList";
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -38,14 +39,7 @@ const UsersPage: React.FC = () => {
     <div className="page-users">
       <h1>Users Page</h1>
       {users.length > 0 ? (
-        <div>
-          {users.map((user: User) => (
-            <div key={user.id}>
-              <span>{user.id}</span>
-              <span>{user.name}</span>
-            </div>
-          ))}
-        </div>
+        <UsersList users={users}></UsersList>
       ) : (
         <div>No users found</div>
       )}

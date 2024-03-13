@@ -1,14 +1,39 @@
+@import "./variables.scss"; 
+
 .app-main {
-    background-color: #282c34;
+    background-color: $color-secondary;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    font-size: $font-size-lg;
+    color: $color-black;
     text-align: center;
   }
 
 
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr)); 
+  gap: $spacing-xl;
+  justify-content: center;
+  .card-item {
+    box-shadow: $box-shadow;
+    border-radius: $border-radius-lg;
+    overflow: hidden; 
+    padding: $spacing-xs;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
+}
+
+
+
+@media (max-width: $breakpoint-md) { 
+  .card-list {
+    grid-template-columns: 1fr; 
+  }
+}

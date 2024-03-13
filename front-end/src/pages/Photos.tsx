@@ -11,6 +11,7 @@ const Photos: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | 0>(0);
   let { albumId } = useParams<"albumId">();
   let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
 
@@ -18,8 +19,9 @@ const Photos: React.FC = () => {
     albumIdNumber = 0;
   }
 
-  const onImgCaruselSelected = (img: Photo) => {
-    console.log("on onImgCaruselSelected", img);
+  const onImgCaruselSelected = (imgIndex: number) => {
+    console.log("on onImgCaruselSelected", imgIndex);
+    setCurrentImageIndex(imgIndex);
   };
 
   const getPhotos = async (album_id: number): Promise<void> => {
@@ -59,7 +61,10 @@ const Photos: React.FC = () => {
       <h2>Photos in Album number {albumId}</h2>
       {photos.length > 0 ? (
         <>
-          <Carousel photos={photos}></Carousel>
+          <Carousel
+            photos={photos}
+            currentImageIndex={currentImageIndex}
+          ></Carousel>
           <PhotoList
             photos={photos}
             onImgClick={onImgCaruselSelected}

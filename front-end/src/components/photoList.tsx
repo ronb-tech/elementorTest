@@ -5,15 +5,11 @@ import CardMedia from "@mui/material/CardMedia";
 
 interface PhotoListProps {
   photos: Photo[];
-  onImgClick: (img: Photo) => void;
+  onImgClick: (index: number) => void;
   className: string;
 }
 
-const PhotoList: React.FC<PhotoListProps> = ({
-  photos,
-  onImgClick,
-  className,
-}) => {
+const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
   const onImgError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const fallbackImg = "https://picsum.photos/300/300";
     console.log("onImgError", fallbackImg);
@@ -26,7 +22,7 @@ const PhotoList: React.FC<PhotoListProps> = ({
         <Card
           className="card-item"
           key={photo.id}
-          onClick={() => onImgClick(photo)}
+          onClick={() => onImgClick(index)}
         >
           <CardMedia
             component="img"

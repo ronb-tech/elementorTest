@@ -1,5 +1,7 @@
 import React from "react";
 import { Photo } from "../utils/types";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 
 interface PhotoListProps {
   photos: Photo[];
@@ -7,19 +9,24 @@ interface PhotoListProps {
 }
 
 const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
-  const fallbackImg = "https://example.com/fallback-image.jpg";
+  const fallbackImg = "https://picsum.photos/300/300?random=";
 
   return (
-    <div className="photo-list">
+    <div className="card-list">
       {photos.map((photo, index) => (
-        <img
+        <Card
+          className="card-item"
           key={photo.id}
-          src={photo.url}
-          alt={photo.title}
-          onError={(e) => (e.currentTarget.src = fallbackImg)}
-          style={{ width: 100, height: 100 }}
           onClick={() => onImgClick(photo)}
-        />
+        >
+          <CardMedia
+            component="img"
+            className="card-img"
+            image={fallbackImg + index}
+            title={photo.title}
+            loading="lazy"
+          />
+        </Card>
       ))}
     </div>
   );

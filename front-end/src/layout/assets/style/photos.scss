@@ -16,6 +16,43 @@
         height: auto;
         margin-bottom: 60px;
 
+        .slick-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 1;
+            cursor: pointer;
+            width: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border-radius: $border-radius-lg;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: $color-dark;
+            font-size: $font-size-xl;
+
+        }
+
+        .slick-prev {
+            left: 25%;
+
+        }
+
+        .slick-next {
+            right: 25%;
+
+        }
+
+        .slick-arrow:hover {
+            background-color: $color-info;
+        }
+
         .slick-dots {
             display: flex;
             justify-content: center;

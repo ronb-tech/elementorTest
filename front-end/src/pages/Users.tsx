@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { User } from "../utils/types";
 import { userServiceLogic } from "../services/index";
 import UsersList from "../components/usersList";
+import SkeletonCard from "../components/SkeletonCard";
+import { Skeleton } from "@mui/material";
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const getAllUsers = async (): Promise<void> => {
     setIsLoading(true);
@@ -25,6 +29,7 @@ const UsersPage: React.FC = () => {
 
   const onRedirectUser = (userId: number): void => {
     console.log("onRedirectUser", userId);
+    navigate(`/users/${userId}/albums`);
   };
 
   useEffect(() => {
@@ -32,7 +37,11 @@ const UsersPage: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading users...</div>;
+    return (
+      <>
+        <SkeletonCard loading={isLoading} numberOfItems={6}></SkeletonCard>
+      </>
+    );
   }
 
   if (error) {

@@ -20,6 +20,8 @@
     text-align: center;
     width: 100%;
     padding: $spacing-xxl;
+    min-height: calc(100vh - 100px);
+
   }
 
   .footer {

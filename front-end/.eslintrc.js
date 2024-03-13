@@ -21,6 +21,9 @@ module.exports = {
     react: {
       version: "detect",
     },
+    "import/resolver": {
+      typescript: {},
+    },
   },
   rules: {
     // Example rules

@@ -1,4 +1,4 @@
-import { User } from "../models/types";
+import { User, Album } from "../models/types";
 const fetch = require("node-fetch");
 import dotenv from "dotenv";
 dotenv.config();
@@ -24,6 +24,21 @@ export const getUsers = async (): Promise<User[]> => {
     return formattedUsers;
   } catch (err) {
     console.error("getUsers", err);
+    return [];
+  }
+};
+
+export const getAllalbums = async (): Promise<Album[]> => {
+  try {
+    const response = await fetch(`${baseUrl}albums`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const albums = await response.json();
+
+    return albums;
+  } catch (err) {
+    console.error("getAlbums", err);
     return [];
   }
 };

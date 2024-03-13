@@ -1,2 +1,23 @@
-/.env
-/node_modules
+# General
+.DS_Store
+*.log
+*.tmp
+
+# Environment variables
+BackEnd/.env
+FE/.env.local
+FE/.env.production
+FE/.env.development
+
+# Dependencies
+BackEnd/node_modules/
+FE/node_modules/
+
+# Production build folder for FrontEnd
+FE/build/
+FE/dist/
+
+# Optional: IDE specific settings
+.vscode/
+.idea/
+*.sublime-workspace

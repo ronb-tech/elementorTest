@@ -58,13 +58,14 @@ const Photos: React.FC = () => {
     <div className="page-photos">
       <h2>Photos in Album number {albumId}</h2>
       {photos.length > 0 ? (
-        <div>
-          {/* <Carousel photos={photos}></Carousel> */}
+        <>
+          <Carousel photos={photos}></Carousel>
           <PhotoList
             photos={photos}
             onImgClick={onImgCaruselSelected}
+            className="photo-list"
           ></PhotoList>
-        </div>
+        </>
       ) : (
         <div>No photos found</div>
       )}

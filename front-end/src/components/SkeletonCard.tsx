@@ -16,7 +16,7 @@ function SkeletonCard(props: SkeletonProps) {
     <div className="card-list">
       {items.map((item, index) => (
         <Skeleton
-          key={item}
+          key={index + 1}
           variant="rectangular"
           className="card-item skeleton-item"
         />

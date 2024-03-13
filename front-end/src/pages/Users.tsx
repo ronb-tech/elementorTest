@@ -23,6 +23,10 @@ const UsersPage: React.FC = () => {
     }
   };
 
+  const onRedirectUser = (userId: number): void => {
+    console.log("onRedirectUser", userId);
+  };
+
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -39,7 +43,7 @@ const UsersPage: React.FC = () => {
     <div className="page-users">
       <h1>Users Page</h1>
       {users.length > 0 ? (
-        <UsersList users={users}></UsersList>
+        <UsersList users={users} onUserClick={onRedirectUser}></UsersList>
       ) : (
         <div>No users found</div>
       )}

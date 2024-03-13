@@ -6,13 +6,18 @@ import { User } from "../utils/types";
 
 interface UsersListProps {
   users: User[];
+  onUserClick: (user_id: number) => void;
 }
 
-const UsersList: React.FC<UsersListProps> = ({ users }) => {
+const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
   return (
     <div className="card-list">
       {users.map((user, index) => (
-        <Card className="card-item" key={user.id}>
+        <Card
+          className="card-item"
+          key={user.id}
+          onClick={() => onUserClick(user.id)}
+        >
           <CardContent>
             <Typography variant="h5">{user.name}</Typography>
             <Typography variant="body2">Email: {user.email}</Typography>

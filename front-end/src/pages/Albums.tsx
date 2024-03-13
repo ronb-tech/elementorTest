@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Album } from "../utils/types";
 import { albumServiceLogic } from "../services/index";
 import SkeletonCard from "../components/SkeletonCard";
+import AlbumList from "../components/albumList";
 
 const Albums: React.FC = () => {
   const [albums, setAlbums] = useState<Album[]>([]);
@@ -31,6 +32,11 @@ const Albums: React.FC = () => {
     }
   };
 
+  const onRedirectAlbum = (albumId: number): void => {
+    console.log("onRedirectUser", albumId);
+    //navigate(`/users/${userId}/albums`);
+  };
+
   useEffect(() => {
     console.log("userId", userIdNumber);
     getAlbums(userIdNumber);
@@ -50,9 +56,11 @@ const Albums: React.FC = () => {
 
   return (
     <div className="page-album">
-      Albums Page, for user {userId}
+      <h2>Albums Page, for user {userId}</h2>
       {albums.length > 0 ? (
-        <div>{JSON.stringify(albums)}</div>
+        <div>
+          <AlbumList albums={albums} onAlbumClick={onRedirectAlbum}></AlbumList>
+        </div>
       ) : (
         <div>not found results</div>
       )}

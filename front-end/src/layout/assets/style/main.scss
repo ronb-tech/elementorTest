@@ -65,14 +65,23 @@
     padding: $spacing-lg;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    max-width: 300px;
+    padding: 0;
 
     &:hover {
       transform: translateY(-5px);
     }
+  }
+}
+
+
+@media (max-width: $breakpoint-xl) {
+  .card-list {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
 }
 

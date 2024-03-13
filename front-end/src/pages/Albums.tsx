@@ -40,7 +40,7 @@ const Albums: React.FC = () => {
   useEffect(() => {
     console.log("userId", userIdNumber);
     getAlbums(userIdNumber);
-  }, [userId]);
+  }, [userIdNumber]);
 
   if (isLoading) {
     return (

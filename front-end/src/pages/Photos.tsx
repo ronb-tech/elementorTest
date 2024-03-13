@@ -3,19 +3,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Photo } from "../utils/types";
 import { photoServiceLogic } from "../services/index";
 import SkeletonCard from "../components/SkeletonCard";
-// import PhotoList from "../components/PhotoList";
+import PhotoList from "../components/photoList";
 
 const Photos: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
   let { albumId } = useParams<"albumId">();
   let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
 
   if (isNaN(albumIdNumber)) {
     albumIdNumber = 0;
   }
+
+  const onImgCaruselSelected = (img: Photo) => {
+    console.log("on onImgCaruselSelected", img);
+  };
 
   const getPhotos = async (album_id: number): Promise<void> => {
     setIsLoading(true);
@@ -53,7 +57,12 @@ const Photos: React.FC = () => {
     <div className="page-photos">
       <h2>Photos in Album number {albumId}</h2>
       {photos.length > 0 ? (
-        <div>{photos.length}</div>
+        <div>
+          <PhotoList
+            photos={photos}
+            onImgClick={onImgCaruselSelected}
+          ></PhotoList>
+        </div>
       ) : (
         <div>No photos found</div>
       )}

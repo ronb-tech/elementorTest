@@ -1,4 +1,4 @@
-import { User, Album } from "../models/types";
+import { User, Album, Photo } from "../models/types";
 const fetch = require("node-fetch");
 import dotenv from "dotenv";
 dotenv.config();
@@ -37,6 +37,31 @@ export const getAllalbums = async (): Promise<Album[]> => {
     const albums = await response.json();
 
     return albums;
+  } catch (err) {
+    console.error("getAlbums", err);
+    return [];
+  }
+};
+
+export const getAllPhotos = async (): Promise<Photo[]> => {
+  try {
+    const response = await fetch(`${baseUrl}photos`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const photos = await response.json();
+    const imageDeafultSize = 600;
+    const imageThumbSize = 200;
+
+    const photosFormat = photos.map((photo: any) => {
+      return {
+        ...photo,
+        url: `${imagePath}${photo?.id}/${imageDeafultSize}/${imageDeafultSize}`,
+        thumbnailUrl: `${imagePath}${photo?.id}/${imageThumbSize}/${imageThumbSize}`,
+      };
+    });
+
+    return photosFormat;
   } catch (err) {
     console.error("getAlbums", err);
     return [];

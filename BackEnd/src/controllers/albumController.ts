@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User, Album } from "../models/types";
+import { Album } from "../models/types";
 import { getAllalbums } from "../utils/getMockData";
 
 let albums: Album[] = [];

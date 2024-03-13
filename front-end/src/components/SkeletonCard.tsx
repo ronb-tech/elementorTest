@@ -13,13 +13,15 @@ function SkeletonCard(props: SkeletonProps) {
   const items = loading ? Array.from(new Array(numberOfItems)) : [];
 
   return (
-    <Grid className="card-list">
+    <div className="card-list">
       {items.map((item, index) => (
-        <Box key={index}>
-          <Skeleton variant="rectangular" className="card-item" />
-        </Box>
+        <Skeleton
+          key={item}
+          variant="rectangular"
+          className="card-item skeleton-item"
+        />
       ))}
-    </Grid>
+    </div>
   );
 }
 

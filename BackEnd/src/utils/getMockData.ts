@@ -56,8 +56,8 @@ export const getAllPhotos = async (): Promise<Photo[]> => {
     const photosFormat = photos.map((photo: any) => {
       return {
         ...photo,
-        url: `${imagePath}${photo?.id}/${imageDeafultSize}/${imageDeafultSize}`,
-        thumbnailUrl: `${imagePath}${photo?.id}/${imageThumbSize}/${imageThumbSize}`,
+        url: `${imagePath}${photo.id}/${imageDeafultSize}/${imageDeafultSize}`,
+        thumbnailUrl: `${imagePath}${photo.id}/${imageThumbSize}/${imageThumbSize}`,
       };
     });
 

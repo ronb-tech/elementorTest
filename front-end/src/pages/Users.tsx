@@ -4,7 +4,6 @@ import { User } from "../utils/types";
 import { userServiceLogic } from "../services/index";
 import UsersList from "../components/usersList";
 import SkeletonCard from "../components/SkeletonCard";
-import { Skeleton } from "@mui/material";
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

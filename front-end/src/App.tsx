@@ -1,12 +1,21 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { AppRoutes } from "./route";
 import "./layout/assets/style/main.scss";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="app-main">
-      <h1>app main</h1>
-    </div>
+    <>
+      <header className="">header</header>
+      <div className="app-main">
+        <Router>
+          <AppRoutes />
+        </Router>
+      </div>
+
+      <footer className="">footer</footer>
+    </>
   );
-}
+};
 
 export default App;

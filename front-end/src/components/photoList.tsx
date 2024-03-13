@@ -9,7 +9,11 @@ interface PhotoListProps {
 }
 
 const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
-  const fallbackImg = "https://picsum.photos/300/300?random=";
+  const onImgError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const fallbackImg = "https://picsum.photos/300/300";
+    console.log("onImgError", fallbackImg);
+    event.currentTarget.src = fallbackImg;
+  };
 
   return (
     <div className="card-list">
@@ -22,8 +26,9 @@ const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
           <CardMedia
             component="img"
             className="card-img"
-            image={fallbackImg + index}
+            image={photo?.url}
             title={photo.title}
+            onError={onImgError}
             loading="lazy"
           />
         </Card>

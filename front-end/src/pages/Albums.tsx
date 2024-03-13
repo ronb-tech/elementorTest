@@ -34,7 +34,7 @@ const Albums: React.FC = () => {
 
   const onRedirectAlbum = (albumId: number): void => {
     console.log("onRedirectUser", albumId);
-    //navigate(`/users/${userId}/albums`);
+    navigate(`/albums/${albumId}/photos`);
   };
 
   useEffect(() => {

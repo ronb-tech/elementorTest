@@ -12,7 +12,7 @@ class PhotoService {
     return await response.json();
   }
 
-  async getPhotoById(id: number) {
+  async getPhotosByAlbumId(id: number) {
     const response = await fetch(`${this.baseUrl}/${id}`);
     return await response.json();
   }

@@ -9,6 +9,20 @@
     align-items: center;
     gap: $spacing-lg;
 
+    .modal-carousel {
+        width: 50%;
+        height: 50%;
+
+        top: 50%;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+
+        transform: translate(-50%, -50%);
+    }
+
+
+
     .slider-container {
         width: 100%;
         margin: auto;
@@ -68,9 +82,9 @@
         }
 
 
-        .img-slider {
-            height: 400px;
-            width: 400px;
+        .img-slider img {
+            max-height: 400px;
+            max-width: 400px;
             margin: 0 auto;
         }
     }

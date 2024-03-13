@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Modal from "@mui/material/Modal";
 import { Photo } from "../utils/types";
 import { photoServiceLogic } from "../services/index";
 import SkeletonCard from "../components/SkeletonCard";
@@ -11,65 +12,59 @@ const Photos: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | 0>(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   let { albumId } = useParams<"albumId">();
   let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
 
-  if (isNaN(albumIdNumber)) {
-    albumIdNumber = 0;
-  }
-
-  const onImgCaruselSelected = (imgIndex: number) => {
-    console.log("on onImgCaruselSelected", imgIndex);
-    setCurrentImageIndex(imgIndex);
-  };
-
-  const getPhotos = async (album_id: number): Promise<void> => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const photosData = await photoServiceLogic.getPhotosByAlbumId(album_id);
-      if (photosData.length > 0) {
-        setPhotos(photosData);
-      } else {
-        setError("No photos found");
-      }
-      setIsLoading(false);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to get photos");
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (albumIdNumber > 0) {
-      getPhotos(albumIdNumber);
-    }
+    const fetchPhotos = async () => {
+      setIsLoading(true);
+      try {
+        const photosData = await photoServiceLogic.getPhotosByAlbumId(
+          albumIdNumber
+        );
+        setPhotos(photosData);
+        setError(null);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to get photos");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (albumIdNumber > 0) fetchPhotos();
   }, [albumIdNumber]);
 
-  if (isLoading) {
-    return <SkeletonCard loading={true} numberOfItems={6} />;
-  }
+  const onImgCaruselSelected = (imgIndex: number) => {
+    setCurrentImageIndex(imgIndex);
+    setIsModalOpen(true);
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  if (isLoading) return <SkeletonCard loading={true} numberOfItems={6} />;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="page-photos">
       <h2>Photos in Album number {albumId}</h2>
+      <span>click on image to see the carousel</span>
       {photos.length > 0 ? (
         <>
-          <Carousel
-            photos={photos}
-            currentImageIndex={currentImageIndex}
-          ></Carousel>
           <PhotoList
+            className=""
             photos={photos}
             onImgClick={onImgCaruselSelected}
-            className="photo-list"
-          ></PhotoList>
+          />
+          <Modal open={isModalOpen} onClose={handleCloseModal}>
+            <div className="modal-carousel">
+              <Carousel photos={photos} currentImageIndex={currentImageIndex} />
+            </div>
+          </Modal>
         </>
       ) : (
         <div>No photos found</div>

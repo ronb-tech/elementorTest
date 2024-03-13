@@ -1,6 +1,6 @@
 // routes/userRoutes.ts
 import express from 'express';
-import { getAllUsers, getUserById }  from '@/controllers/userController' ;
+import { getAllUsers, getUserById }  from '../controllers/userController' ;
 
 const userRoutes = express.Router();
 userRoutes.get('/', getAllUsers);

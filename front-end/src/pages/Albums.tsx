@@ -63,7 +63,7 @@ const Albums: React.FC = () => {
     <div className="page-album">
       <h2>Albums Page, for user {userId}</h2>
       <h3>you have {albums.length} Albums </h3>
-      <AddItems text="albums" addUsers={onAddAlbum}></AddItems>
+      <AddItems text="albums" addItems={onAddAlbum}></AddItems>
 
       {albums.length > 0 ? (
         <div>

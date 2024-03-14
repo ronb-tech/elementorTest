@@ -98,7 +98,7 @@ const UsersPage: React.FC = () => {
     <div className="page-users">
       <h1>Users Page</h1>
       <h3>you have {users.length} users </h3>
-      <AddItems text="users" addUsers={onAddUsers}></AddItems>
+      <AddItems text="users" addItems={onAddUsers}></AddItems>
 
       {users.length > 0 ? (
         <>

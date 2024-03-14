@@ -4,17 +4,35 @@ import {
   USERS_FILE_PATH,
   ALBUMS_FILE_PATH,
 } from "../utils/crudFiles";
+import {
+  getCollection,
+  usersCollection,
+  albumsCollection,
+  photosCollection,
+} from "../utils/mongoSetup";
+
 import path from "path";
+import dotenv from "dotenv";
+dotenv.config();
+
+const useMongoDB = process.env.USE_MONGODB;
 
 export const getUsersData = async (
   usersFilePath: string = USERS_FILE_PATH,
   albumsFilePath: string = ALBUMS_FILE_PATH
 ): Promise<(User & { albumCount: number })[]> => {
-  let users: User[] = await readJsonFile<User[]>(usersFilePath);
-  let albums: Album[] = await readJsonFile<Album[]>(albumsFilePath);
+  let users: User[] = [];
+  let albums: Album[] = [];
+
+  console.log("use mongo", useMongoDB);
 
   try {
-    users = await readJsonFile<User[]>(usersFilePath);
+    if (!useMongoDB) {
+      const collection = await getCollection<User>(usersCollection);
+      users = await collection.find({}).toArray();
+    } else {
+      users = await readJsonFile<User[]>(usersFilePath);
+    }
   } catch (error) {
     console.error(`Failed to read users from file: ${usersFilePath}`, error);
     throw new Error("Failed to load user data");

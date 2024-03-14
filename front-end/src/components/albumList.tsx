@@ -3,36 +3,60 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
 import { Album } from "../utils/types";
 import { onImgError } from "../utils/helper";
+import { ActionItems, getActionsOptions } from "./ActionItems"; // Ensure these are generic
 
 interface AlbumListProps {
   albums: Album[];
-  onAlbumClick: (user_id: number) => void;
+  onAlbumClick: (albumId: number) => void;
+  onDeleteItem: (albumId: number) => void; // Assuming you're adding this
+  onEditItem: (albumId: number) => void; // Assuming you're adding this
 }
 
-const AlbumList: React.FC<AlbumListProps> = ({ albums, onAlbumClick }) => {
+const AlbumList: React.FC<AlbumListProps> = ({
+  albums,
+  onAlbumClick,
+  onDeleteItem,
+  onEditItem,
+}) => {
+  // Adjust actionsOptions to suit albums if necessary
+  const actionsOptions = (id: number) => getActionsOptions(id, onActionClick);
+
+  const onActionClick = (actionId: string, itemId: number) => {
+    if (actionId === "delete") {
+      onDeleteItem(itemId);
+    }
+    if (actionId === "edit") {
+      onEditItem(itemId);
+    }
+    // Add more actions as needed
+  };
+
   return (
     <div className="card-list">
-      {albums.map((album, index) => (
-        <Card
-          className="card-item"
-          key={album._id}
-          onClick={() => onAlbumClick(album._id)}
-        >
+      {albums.map((album) => (
+        <Card className="card-item" key={album._id}>
           <CardMedia
             component="img"
             className="card-img"
-            image={album.thumbnailUrl}
+            image={album.thumbnailUrl || "placeholder-img-url"}
             title={album.title}
             onError={onImgError}
           />
-          <CardContent>
+          <CardContent onClick={() => onAlbumClick(album._id)}>
             <Typography variant="body2">
               <b>Album Name: </b>
               {album.title}
             </Typography>
           </CardContent>
+          <CardActions disableSpacing>
+            <ActionItems
+              itemId={album._id}
+              actions={actionsOptions(album._id)}
+            />
+          </CardActions>
         </Card>
       ))}
     </div>

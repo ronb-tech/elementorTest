@@ -13,8 +13,8 @@ interface ActionItem {
 
 interface ActionItemsProps {
   itemId: number | string;
-  isSelected: boolean;
-  onToggleSelect: (itemId: number | string) => void;
+  isSelected?: boolean;
+  onToggleSelect?: (itemId: number | string) => void;
   actions: ActionItem[];
   onActionClick?: (
     actionId: string,
@@ -25,8 +25,8 @@ interface ActionItemsProps {
 
 export const ActionItems: React.FC<ActionItemsProps> = ({
   itemId,
-  isSelected,
-  onToggleSelect,
+  isSelected = false,
+  onToggleSelect = () => {},
   actions,
 }) => {
   const handleActionClick = (

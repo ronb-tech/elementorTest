@@ -3,7 +3,8 @@ export interface User {
   name: string;
   username: string;
   email: string;
-  createdAt: string;
+  albumCount?: number;
+  createdAt?: string;
   lastUpdated?: Date;
   limit?: number;
   avatarUrl?: string;

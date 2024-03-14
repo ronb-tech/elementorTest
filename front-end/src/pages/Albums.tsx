@@ -80,10 +80,10 @@ const AlbumsPage: React.FC = () => {
   }, [userId]);
 
   const onAddAlbum = (): void => {
-    navigate("/albums/albumForm");
+    navigate(`/users/${userId}/albums/albumForm/`);
   };
-  const onAlbumEdit = (): void => {
-    navigate(`/albums/albumForm/${userId}`);
+  const onAlbumEdit = (albumId: number): void => {
+    navigate(`/users/${userId}/albums/albumForm/${albumId}`);
   };
 
   if (isLoading) {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import { Photo } from "../utils/types";
 import { photoServiceLogic } from "../services/index";
@@ -7,6 +6,7 @@ import SkeletonCard from "../components/SkeletonCard";
 import PhotoList from "../components/PhotoList";
 import Carousel from "../components/Carousel";
 import "../layout/assets/style/photos.scss";
+import useParsedParam from "../utils/useParsedParam";
 
 const Photos: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -14,16 +14,13 @@ const Photos: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  let { albumId } = useParams<"albumId">();
-  let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
+  const albumId = useParsedParam("albumId");
 
   useEffect(() => {
     const fetchPhotos = async () => {
       setIsLoading(true);
       try {
-        const photosData = await photoServiceLogic.getPhotosByAlbumId(
-          albumIdNumber
-        );
+        const photosData = await photoServiceLogic.getPhotosByAlbumId(albumId);
         setPhotos(photosData);
         setError(null);
       } catch (err) {
@@ -34,8 +31,8 @@ const Photos: React.FC = () => {
       }
     };
 
-    if (albumIdNumber > 0) fetchPhotos();
-  }, [albumIdNumber]);
+    if (albumId > 0) fetchPhotos();
+  }, [albumId]);
 
   const onImgCaruselSelected = (imgIndex: number) => {
     setCurrentImageIndex(imgIndex);

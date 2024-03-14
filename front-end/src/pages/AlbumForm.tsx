@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Container, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Album } from "../utils/types";
 import { albumServiceLogic } from "../services/index";
+import useParsedParam from "../utils/useParsedParam";
 
 const AlbumForm: React.FC = () => {
   const [album, setAlbum] = useState<Album>({
@@ -13,13 +14,8 @@ const AlbumForm: React.FC = () => {
   });
 
   const navigate = useNavigate();
-  let { albumId } = useParams<"albumId">();
-  let { userId } = useParams<"userId">();
-
-  let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
-  if (isNaN(albumIdNumber)) {
-    albumIdNumber = 0;
-  }
+  const albumId = useParsedParam("albumId");
+  const userId = useParsedParam("userId");
 
   useEffect(() => {
     const fetchAlbumData = async (id: number) => {
@@ -27,10 +23,10 @@ const AlbumForm: React.FC = () => {
       setAlbum(albumData);
     };
 
-    if (albumIdNumber) {
-      fetchAlbumData(albumIdNumber);
+    if (albumId) {
+      fetchAlbumData(albumId);
     }
-  }, [albumIdNumber]);
+  }, [albumId]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -44,7 +40,7 @@ const AlbumForm: React.FC = () => {
       if (album._id && album._id !== -1) {
         albumServiceLogic.updateAlbum(album).then((res) => {
           console.log("success, album updated", res);
-          navigate(`/users/${albumIdNumber}/albums`);
+          navigate(`/users/${albumId}/albums`);
         });
       } else {
         albumServiceLogic.createAlbum(album).then((res) => {
@@ -60,7 +56,7 @@ const AlbumForm: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1">
-        {albumIdNumber ? "Edit Album" : "Add Album"}
+        {albumId ? "Edit Album" : "Add Album"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -86,7 +82,7 @@ const AlbumForm: React.FC = () => {
           color="primary"
           style={{ marginTop: "20px" }}
         >
-          {albumIdNumber ? "Update" : "Create"}
+          {albumId ? "Update" : "Create"}
         </Button>
       </form>
     </Container>

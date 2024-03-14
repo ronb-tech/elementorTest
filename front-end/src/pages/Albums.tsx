@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Album } from "../utils/types";
 import { albumServiceLogic } from "../services/index";
 import AlbumList from "../components/AlbumList";

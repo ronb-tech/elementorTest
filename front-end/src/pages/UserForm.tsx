@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Container, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { User } from "../utils/types";
 import { userServiceLogic } from "../services/index";
+import useParsedParam from "../utils/useParsedParam";
 
 const UserForm: React.FC = () => {
   const [user, setUser] = useState<User>({
@@ -13,11 +14,7 @@ const UserForm: React.FC = () => {
   });
 
   const navigate = useNavigate();
-  let { userId } = useParams<"userId">();
-  let userIdNumber = userId ? parseInt(userId, 10) : 0;
-  if (isNaN(userIdNumber)) {
-    userIdNumber = 0;
-  }
+  const userId = useParsedParam("userId");
 
   useEffect(() => {
     const fetchUserData = async (id: number) => {
@@ -25,10 +22,10 @@ const UserForm: React.FC = () => {
       setUser(userData);
     };
 
-    if (userIdNumber) {
-      fetchUserData(userIdNumber);
+    if (userId) {
+      fetchUserData(userId);
     }
-  }, [userIdNumber]);
+  }, [userId]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -58,7 +55,7 @@ const UserForm: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1">
-        {userIdNumber ? "Edit User" : "Add User"}
+        {userId ? "Edit User" : "Add User"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -85,14 +82,13 @@ const UserForm: React.FC = () => {
           value={user.email || ""}
           onChange={handleChange}
         />
-        {/* Add more fields as needed */}
         <Button
           type="submit"
           variant="contained"
           color="primary"
           style={{ marginTop: "20px" }}
         >
-          {userIdNumber ? "Update" : "Create"}
+          {userId ? "Update" : "Create"}
         </Button>
       </form>
     </Container>

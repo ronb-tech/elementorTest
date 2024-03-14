@@ -12,7 +12,7 @@ import {
   photosCollection,
 } from "../utils/mongoSetup";
 
-import { Document } from "mongodb";
+import { Document, ObjectId } from "mongodb";
 import { User, Album, Photo } from "../models/types";
 
 import dotenv from "dotenv";
@@ -43,6 +43,40 @@ export async function fetchData<T extends Document>({
   }
 
   return data;
+}
+
+async function deleteItem<T extends Document>({
+  collectionName,
+  filePath,
+  itemId,
+}: {
+  collectionName?: string;
+  filePath?: string;
+  itemId: string;
+}): Promise<boolean> {
+  const isUseMongoDB = process.env.USE_MONGODB === "true";
+
+  if (isUseMongoDB) {
+    if (!collectionName) {
+      throw new Error(
+        "MongoDB collection name must be provided when using MongoDB."
+      );
+    }
+    // const collection = await getCollection<T>(collectionName);
+    // const result = await collection.deleteOne({ _id: new ObjectId(itemId) });
+    // return result.deletedCount === 1;
+    return true;
+  } else {
+    if (!filePath) {
+      throw new Error("File path must be provided when not using MongoDB.");
+    }
+
+    let items = await readJsonFile<T[]>(filePath);
+    const initialLength = items.length;
+    items = items.filter((item) => item._id.toString() !== itemId);
+    await writeJsonFile(filePath, items);
+    return items.length < initialLength;
+  }
 }
 
 export const mapHandles = {

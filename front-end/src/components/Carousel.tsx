@@ -1,5 +1,5 @@
 import React, { useState, useEffect, CSSProperties } from "react";
-
+import { onImgError } from "../utils/helper";
 import Slider from "react-slick";
 import { Photo } from "../utils/types";
 import "slick-carousel/slick/slick.css";
@@ -41,11 +41,6 @@ const Carousel: React.FC<CarouselProps> = ({ photos, currentImageIndex }) => {
     console.log("img index", currentImageIndex);
     setSliderKey(currentImageIndex);
   }, [currentImageIndex]);
-
-  const onImgError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const fallbackImg = "https://picsum.photos/300/300";
-    event.currentTarget.src = fallbackImg;
-  };
 
   return (
     <div className="silder slider-container " style={styleModal}>

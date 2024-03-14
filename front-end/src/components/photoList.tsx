@@ -2,6 +2,7 @@ import React from "react";
 import { Photo } from "../utils/types";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import { onImgError } from "../utils/helper";
 
 interface PhotoListProps {
   photos: Photo[];
@@ -10,13 +11,6 @@ interface PhotoListProps {
 }
 
 const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
-  const onImgError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const fallbackImg =
-      "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
-    console.log("onImgError", fallbackImg);
-    event.currentTarget.src = fallbackImg;
-  };
-
   return (
     <div className="card-list">
       {photos.map((photo, index) => (

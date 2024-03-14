@@ -57,7 +57,7 @@ export const getAllPhotos = async (): Promise<Photo[]> => {
     }
     const photos = await response.json();
     const imageDeafultSize = 600;
-    const imageThumbSize = 200;
+    const imageThumbSize = 300;
 
     const photosFormat = photos.map(({ id, ...rest }: any) => ({
       ...rest,

@@ -44,11 +44,11 @@ const UsersPage: React.FC = () => {
   };
 
   const onUserEdit = (userId: number): void => {
-    navigate(`/user/${userId}`);
+    navigate(`/user/form/${userId}`);
   };
 
   const onAddUsers = (): void => {
-    navigate(`/user`);
+    navigate(`/user/form`);
   };
 
   const handleRequestDelete = (itemId: number, itemName: string) => {

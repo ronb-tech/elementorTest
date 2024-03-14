@@ -96,7 +96,7 @@ export async function addItem<T extends Document>({
   filePath?: string;
   item: T;
   lastId?: number;
-}): Promise<boolean> {
+}): Promise<any> {
   const isUseMongoDB = process.env.USE_MONGODB === "true";
 
   if (isUseMongoDB) {
@@ -108,7 +108,7 @@ export async function addItem<T extends Document>({
     // const collection = await getCollection<T>(collectionName);
     // const response = await collection.insertOne(item as any);
     // return { ...item, _id: response.insertedId };
-    return false;
+    return { ok: false, id: -1 };
   } else {
     if (!filePath) {
       throw new Error("File path must be provided when not using MongoDB.");
@@ -121,7 +121,7 @@ export async function addItem<T extends Document>({
     const newItem = { ...item, _id: nextId };
     items.push(newItem as T);
     await writeJsonFile(filePath, items);
-    return true;
+    return { ok: true, id: nextId };
   }
 }
 

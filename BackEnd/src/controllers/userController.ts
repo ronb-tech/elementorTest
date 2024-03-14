@@ -71,9 +71,9 @@ export const addUser = async (req: Request, res: Response) => {
     ...mapHandles.users.allUsers,
     item: userData,
   })
-    .then((isAdded) => {
-      if (isAdded) {
-        res.status(201).send({ message: "User added successfully", ok: true });
+    .then((response) => {
+      if (response.ok) {
+        res.status(201).send({ response });
       }
     })
     .catch((error) => {

@@ -111,6 +111,14 @@
     max-width: 300px;
     padding: 0;
 
+    .card-actions {
+      border-top: 1px solid $color-black;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      height: 100%;
+    }
+
     .card-img-avatar {
       width: 100px;
       height: 100px;

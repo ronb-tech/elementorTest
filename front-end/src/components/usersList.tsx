@@ -1,10 +1,17 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActions,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { User } from "../utils/types";
 import { onImgError } from "../utils/helper";
+import ActionItems from "./ActionItems";
+import { border } from "@mui/system";
 
 interface UsersListProps {
   users: User[];
@@ -12,6 +19,12 @@ interface UsersListProps {
 }
 
 const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
+  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+
+  const onToggleSelectItem = (item: any) => {
+    console.log("onToggleSelectItem", item);
+  };
+
   return (
     <div className="card-list">
       {users.map((user, index) => (
@@ -34,6 +47,25 @@ const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
               number of Albums: {user?.albumCount}
             </Typography>
           </CardContent>
+          <CardActions disableSpacing className="card-actions">
+            <ActionItems
+              itemId={user._id}
+              isSelected={selectedUsers.includes(user._id)}
+              onToggleSelect={(id) => onToggleSelectItem(id)}
+              actions={[
+                {
+                  icon: <EditIcon />,
+                  label: "edit",
+                  onClick: () => console.log("Edit", user._id),
+                },
+                {
+                  icon: <DeleteIcon />,
+                  label: "delete",
+                  onClick: () => console.log("Delete", user._id),
+                },
+              ]}
+            />
+          </CardActions>
         </Card>
       ))}
     </div>

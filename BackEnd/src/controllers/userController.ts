@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { User } from "../models/types";
 import { getAllUsersData } from "../services/usersService";
 import { deleteItem, mapHandles } from "../models/dataHandler";

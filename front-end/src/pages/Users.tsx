@@ -65,6 +65,12 @@ const UsersPage: React.FC = () => {
     try {
       const isRemoved = await userServiceLogic.deleteUser(itemId);
       console.log(`Deleted ${itemName}`, isRemoved);
+      if (isRemoved) {
+        setTimeout(() => {
+          handleCloseDeleteDialog();
+          window.location.reload();
+        }, 1500);
+      }
     } catch (err) {
       console.error(err);
     }

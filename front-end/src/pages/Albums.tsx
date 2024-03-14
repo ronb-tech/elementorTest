@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Album } from "../utils/types";
 import { albumServiceLogic } from "../services/index";
 import SkeletonCard from "../components/SkeletonCard";
-import AlbumList from "../components/albumList";
+import AlbumList from "../components/AlbumList";
 import { AddItems } from "../components/AddItems";
 
 const Albums: React.FC = () => {

@@ -4,7 +4,7 @@ import Modal from "@mui/material/Modal";
 import { Photo } from "../utils/types";
 import { photoServiceLogic } from "../services/index";
 import SkeletonCard from "../components/SkeletonCard";
-import PhotoList from "../components/photoList";
+import PhotoList from "../components/PhotoList";
 import Carousel from "../components/Carousel";
 import "../layout/assets/style/photos.scss";
 

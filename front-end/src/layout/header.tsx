@@ -14,15 +14,15 @@ export const Header: React.FC = () => {
       <Toolbar className="header-toolbar">
         <div className="header-left">
           <Link component={RouterLink} color="inherit" to="/" variant="h6">
-            Main App
+            <Typography>Main App</Typography>
           </Link>
           <Link component={RouterLink} color="inherit" to="/users" variant="h6">
-            Users
+            <Typography>Users</Typography>
           </Link>
         </div>
 
         <div className="header-right">
-          <Typography variant="h6" component="div">
+          <Typography component="div">
             {appUser.isAdmin
               ? `Hello, ${appUser.userName} (Admin)`
               : `Hello, ${appUser.userName}`}

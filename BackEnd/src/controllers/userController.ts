@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { User } from "../models/types";
-import { getUsersData } from "../services/usersService";
+import { getAllUsersData } from "../services/usersService";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const users: User[] = (await getUsersData()) || [];
+    const users: User[] = await getAllUsersData();
     if (users && users.length > 0) {
       res.json(users);
     } else {
@@ -18,9 +18,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const users: User[] = (await getUsersData()) || [];
-
+  const users: User[] = await getAllUsersData();
   const user = users.find((user) => user.id.toString() === id);
+
   if (user) {
     res.json(user);
   } else {

@@ -1,5 +1,19 @@
-import { getCollection } from "../utils/mongoSetup";
-import { readJsonFile, writeJsonFile } from "../utils/crudFiles";
+import {
+  readJsonFile,
+  writeJsonFile,
+  USERS_FILE_PATH,
+  ALBUMS_FILE_PATH,
+  PHOTOS_FILE_PATH,
+} from "../utils/crudFiles";
+import {
+  getCollection,
+  usersCollection,
+  albumsCollection,
+  photosCollection,
+} from "../utils/mongoSetup";
+
+import { User, Album, Photo } from "../models/types";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -31,3 +45,18 @@ export async function fetchData<T>({
 
   return data;
 }
+
+export const mapHandles = {
+  users: {
+    allUsers: {
+      collectionName: usersCollection,
+      filePath: USERS_FILE_PATH,
+    },
+  },
+  albums: {
+    allAlbums: {
+      collectionName: albumsCollection,
+      filePath: ALBUMS_FILE_PATH,
+    },
+  },
+};

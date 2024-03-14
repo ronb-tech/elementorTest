@@ -1,41 +1,19 @@
 import { User, Album, Photo } from "../models/types";
-import {
-  readJsonFile,
-  USERS_FILE_PATH,
-  ALBUMS_FILE_PATH,
-} from "../utils/crudFiles";
-import {
-  getCollection,
-  usersCollection,
-  albumsCollection,
-  photosCollection,
-} from "../utils/mongoSetup";
-import { fetchData } from "../models/dataHandler";
+import { fetchData, mapHandles } from "../models/dataHandler";
 
-export const getUsersData = async (
-  usersFilePath: string = USERS_FILE_PATH,
-  albumsFilePath: string = ALBUMS_FILE_PATH
-): Promise<(User & { albumCount: number })[]> => {
+export const getAllUsersData = async (): Promise<User[]> => {
   let users: User[] = [];
   let albums: Album[] = [];
 
   try {
-    users = await fetchData({
-      collectionName: usersCollection,
-      filePath: USERS_FILE_PATH,
-    });
+    users = await fetchData(mapHandles.users.allUsers);
   } catch (error) {
-    console.error(`Failed to read users from file: ${usersFilePath}`, error);
     throw new Error("Failed to load user data");
   }
 
   try {
-    albums = await fetchData({
-      collectionName: albumsCollection,
-      filePath: ALBUMS_FILE_PATH,
-    });
+    albums = await fetchData(mapHandles.albums.allAlbums);
   } catch (error) {
-    console.error(`Failed to read albums from file: ${albumsFilePath}`, error);
     throw new Error("Failed to load album data");
   }
 

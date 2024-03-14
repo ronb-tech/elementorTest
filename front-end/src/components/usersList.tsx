@@ -15,14 +15,14 @@ const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
       {users.map((user, index) => (
         <Card
           className="card-item"
-          key={user.id}
-          onClick={() => onUserClick(user.id)}
+          key={user._id}
+          onClick={() => onUserClick(user._id)}
         >
           <CardContent>
             <Typography variant="h5">{user.name}</Typography>
             <Typography variant="body2">Email: {user.email}</Typography>
             <Typography variant="body2">
-              number of Albums: {index * 2}
+              number of Albums: {user?.albumCount}
             </Typography>
           </CardContent>
         </Card>

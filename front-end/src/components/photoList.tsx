@@ -22,7 +22,7 @@ const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
       {photos.map((photo, index) => (
         <Card
           className="card-item"
-          key={photo.id}
+          key={photo._id}
           onClick={() => onImgClick(index)}
         >
           <CardMedia

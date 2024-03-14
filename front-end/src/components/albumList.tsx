@@ -19,8 +19,8 @@ const AlbumList: React.FC<AlbumListProps> = ({ albums, onAlbumClick }) => {
       {albums.map((album, index) => (
         <Card
           className="card-item"
-          key={album.id}
-          onClick={() => onAlbumClick(album.id)}
+          key={album._id}
+          onClick={() => onAlbumClick(album._id)}
         >
           <CardMedia
             component="img"

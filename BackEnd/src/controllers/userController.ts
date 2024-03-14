@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/types";
 import { getAllUsersData } from "../services/usersService";
-import { deleteItem, mapHandles } from "../models/dataHandler";
+import { deleteItem, updateItem, mapHandles } from "../models/dataHandler";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -27,6 +27,35 @@ export const getUserById = async (req: Request, res: Response) => {
   } else {
     res.status(404).send("User not found");
   }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  // const { id } = req.params;
+  const updateData = req.body;
+
+  if (!updateData && !updateData._id) {
+    return res
+      .status(400)
+      .send({ message: "Update data is missing", ok: false });
+  }
+
+  updateItem({
+    ...mapHandles.users.allUsers,
+    updateData,
+  })
+    .then((response) => {
+      if (response) {
+        res
+          .status(200)
+          .send({ message: "User updated successfully", ok: true });
+      } else {
+        res.status(404).send({ message: "User not found", ok: false });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send({ message: "Server error", ok: false });
+    });
 };
 
 export const deleteUserById = async (req: Request, res: Response) => {

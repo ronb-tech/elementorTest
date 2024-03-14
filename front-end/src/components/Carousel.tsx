@@ -20,12 +20,12 @@ const Carousel: React.FC<CarouselProps> = ({ photos, currentImageIndex }) => {
   };
 
   const styleModal = {
-    position: "absolute", // Use fixed if you want the modal to stay in place even when scrolling
+    position: "absolute",
     width: "500px",
     height: "500px",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)", // Centers the modal precisely
+    transform: "translate(-50%, -50%)",
     zIndex: "1999",
   };
 

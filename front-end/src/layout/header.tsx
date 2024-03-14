@@ -20,6 +20,22 @@ export const Header: React.FC = () => {
           <Link component={RouterLink} color="inherit" to="/users" variant="h6">
             <Typography>Users</Typography>
           </Link>
+          <Link
+            component={RouterLink}
+            color="inherit"
+            to="/users/1/albums"
+            variant="h6"
+          >
+            <Typography>Album #1</Typography>
+          </Link>
+          <Link
+            component={RouterLink}
+            color="inherit"
+            to="albums/1/photos"
+            variant="h6"
+          >
+            <Typography>Photo #1</Typography>
+          </Link>
         </div>
 
         <div className="header-right">

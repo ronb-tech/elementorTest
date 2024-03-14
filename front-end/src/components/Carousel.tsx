@@ -12,11 +12,28 @@ const Carousel: React.FC<CarouselProps> = ({ photos, currentImageIndex }) => {
   const [sliderKey, setSliderKey] = useState<number>(currentImageIndex || 0);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+  };
+
+  const styleModal = {
+    position: "absolute", // Use fixed if you want the modal to stay in place even when scrolling
+    width: "500px",
+    height: "500px",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)", // Centers the modal precisely
+    zIndex: "1999",
+  };
+
+  const styleCarousel = {
+    width: "100%",
+    height: "100%",
+    margin: "0 auto",
+    objectFit: "contain",
   };
 
   useEffect(() => {
@@ -30,12 +47,12 @@ const Carousel: React.FC<CarouselProps> = ({ photos, currentImageIndex }) => {
   };
 
   return (
-    <div className="slider-container">
+    <div className="silder slider-container " style={styleModal}>
       <Slider {...settings} initialSlide={sliderKey} key={photos.length}>
         {photos.map((photo, index) => (
           <div key={index}>
             <img
-              className="img-slider"
+              style={styleCarousel}
               src={photo.url}
               alt={photo.title}
               onError={onImgError}

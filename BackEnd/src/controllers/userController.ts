@@ -72,7 +72,9 @@ export const addUser = async (req: Request, res: Response) => {
     item: userData,
   })
     .then((isAdded) => {
-      res.status(201).send({ message: "User added successfully", ok: isAdded });
+      if (isAdded) {
+        res.status(201).send({ message: "User added successfully", ok: true });
+      }
     })
     .catch((error) => {
       console.error(error);

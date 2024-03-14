@@ -51,7 +51,7 @@ const UsersList: React.FC<UsersListProps> = ({
           <CardMedia
             component="img"
             className="card-img-avatar"
-            image={user.avatarUrl}
+            image={user.avatarUrl || "img"}
             title={user.username}
             onError={onImgError}
           />

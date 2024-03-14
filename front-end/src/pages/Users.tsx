@@ -39,7 +39,6 @@ const UsersPage: React.FC = () => {
   };
 
   const onUserDelete = (userId: number): void => {
-    console.log("onUserDelete", userId);
     const itemName = users?.find((usr) => usr._id == userId)?.name || "";
     handleRequestDelete(userId, itemName);
   };
@@ -62,8 +61,14 @@ const UsersPage: React.FC = () => {
     setDeleteDialogOpen(false);
   };
 
-  const handleConfirmDelete = (itemId: number) => {
-    console.log(`Deleting ${itemName}`, itemId);
+  const handleConfirmDelete = async (itemId: number) => {
+    try {
+      const isRemoved = await userServiceLogic.deleteUser(itemId);
+      console.log(`Deleted ${itemName}`, isRemoved);
+    } catch (err) {
+      console.error(err);
+    }
+
     handleCloseDeleteDialog();
   };
 

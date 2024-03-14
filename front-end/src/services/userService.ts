@@ -39,10 +39,11 @@ class userService {
   }
 
   async deleteUser(id: number) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+    const response = await fetch(`${this.baseUrl}/delete/${id}`, {
       method: "DELETE",
     });
-    return await response.ok;
+    const data = await response.json();
+    return data.ok;
   }
 }
 

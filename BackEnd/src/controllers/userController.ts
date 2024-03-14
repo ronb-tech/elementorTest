@@ -39,9 +39,9 @@ export const deleteUserById = async (req: Request, res: Response) => {
       itemId: user?._id,
     });
     if (isDeleted) {
-      return res.status(200).send({ message: "User deleted", success: true });
+      return res.status(200).send({ message: "User deleted", ok: true });
     }
-    return res.status(404).send({ message: "User not found", success: false });
+    return res.status(404).send({ message: "User not found", ok: false });
   } else {
     res.status(500).send("Server error");
   }

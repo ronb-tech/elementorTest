@@ -8,6 +8,6 @@ import {
 const userRoutes = express.Router();
 userRoutes.get("/", getAllUsers);
 userRoutes.get("/:id", getUserById);
-userRoutes.get("/delete/:id", getUserById);
+userRoutes.delete("/delete/:id", deleteUserById);
 
 export default userRoutes;

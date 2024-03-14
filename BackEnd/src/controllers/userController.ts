@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import { User } from "../models/types";
 import { getAllUsersData } from "../services/usersService";
 import { deleteItem, mapHandles } from "../models/dataHandler";
@@ -34,14 +34,18 @@ export const deleteUserById = async (req: Request, res: Response) => {
   const users: User[] = await getAllUsersData();
   const user = await users.find((user) => user._id.toString() === id);
   if (user) {
-    const isDeleted = await deleteItem({
+    deleteItem({
       ...mapHandles.users.allUsers,
       itemId: user?._id,
-    });
-    if (isDeleted) {
-      return res.status(200).send({ message: "User deleted", ok: true });
-    }
-    return res.status(404).send({ message: "User not found", ok: false });
+    })
+      .then((response) => {
+        if (response) {
+          return res.status(200).send({ message: "User deleted", ok: true });
+        }
+      })
+      .catch(() => {
+        return res.status(404).send({ message: "User not found", ok: false });
+      });
   } else {
     res.status(500).send("Server error");
   }

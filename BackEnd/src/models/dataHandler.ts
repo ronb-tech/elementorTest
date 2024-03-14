@@ -73,9 +73,13 @@ export async function deleteItem<T extends Document>({
 
     let items = await readJsonFile<T[]>(filePath);
     const initialLength = items.length;
-    items = items.filter((item) => item._id.toString() !== itemId);
-    await writeJsonFile(filePath, items);
-    return items.length < initialLength;
+    items = items.filter((item) => item._id !== itemId);
+    try {
+      const removeOpertion = await writeJsonFile(filePath, items);
+      return items.length < initialLength;
+    } catch (error) {
+      return false;
+    }
   }
 }
 

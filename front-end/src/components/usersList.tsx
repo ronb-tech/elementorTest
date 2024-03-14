@@ -6,12 +6,9 @@ import {
   Typography,
   CardActions,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { User } from "../utils/types";
 import { onImgError } from "../utils/helper";
-import ActionItems from "./ActionItems";
-import { border } from "@mui/system";
+import { ActionItems, getActionsOptions } from "./ActionItems";
 
 interface UsersListProps {
   users: User[];
@@ -20,6 +17,7 @@ interface UsersListProps {
 
 const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+  const actionsOptions = (id: number) => getActionsOptions(id);
 
   const onToggleSelectItem = (item: any) => {
     console.log("onToggleSelectItem", item);
@@ -52,18 +50,7 @@ const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
               itemId={user._id}
               isSelected={selectedUsers.includes(user._id)}
               onToggleSelect={(id) => onToggleSelectItem(id)}
-              actions={[
-                {
-                  icon: <EditIcon />,
-                  label: "edit",
-                  onClick: () => console.log("Edit", user._id),
-                },
-                {
-                  icon: <DeleteIcon />,
-                  label: "delete",
-                  onClick: () => console.log("Delete", user._id),
-                },
-              ]}
+              actions={actionsOptions(user._id)}
             />
           </CardActions>
         </Card>

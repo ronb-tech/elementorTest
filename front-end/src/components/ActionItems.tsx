@@ -1,9 +1,12 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
-import { Action } from "@remix-run/router";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 interface ActionItem {
+  actionId: string;
   icon: React.ReactElement;
   label: string;
   onClick: () => void;
@@ -16,7 +19,7 @@ interface ActionItemsProps {
   actions: ActionItem[];
 }
 
-const ActionItems: React.FC<ActionItemsProps> = ({
+export const ActionItems: React.FC<ActionItemsProps> = ({
   itemId,
   isSelected,
   onToggleSelect,
@@ -56,4 +59,28 @@ const ActionItems: React.FC<ActionItemsProps> = ({
   );
 };
 
-export default ActionItems;
+const handleActionEvent = (actionId: string, itemId: number): void => {
+  console.log("action name", actionId);
+  console.log("action item id", actionId);
+};
+
+export const getActionsOptions = (id: number) => [
+  {
+    actionId: "edit",
+    icon: <EditIcon />,
+    label: "edit",
+    onClick: () => handleActionEvent("edit", id),
+  },
+  {
+    actionId: "delete",
+    icon: <DeleteIcon />,
+    label: "delete",
+    onClick: () => handleActionEvent("delete", id),
+  },
+  {
+    actionId: "add",
+    icon: <AddIcon />,
+    label: "add",
+    onClick: () => handleActionEvent("add", id),
+  },
+];

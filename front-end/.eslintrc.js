@@ -26,7 +26,6 @@ module.exports = {
     },
   },
   rules: {
-    // Example rules
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,
@@ -34,6 +33,7 @@ module.exports = {
     ],
     "react/jsx-props-no-spreading": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    // Customize additional rules here
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
   },
 };

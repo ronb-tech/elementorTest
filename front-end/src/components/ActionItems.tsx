@@ -1,6 +1,7 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
+import { Action } from "@remix-run/router";
 
 interface ActionItem {
   icon: React.ReactElement;
@@ -21,8 +22,20 @@ const ActionItems: React.FC<ActionItemsProps> = ({
   onToggleSelect,
   actions,
 }) => {
+  const handleActionClick = (
+    action: ActionItem,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    action.onClick();
+  };
+
+  const stopPropagationForDiv = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
+
   return (
-    <>
+    <div className="card-actions-items" onClick={stopPropagationForDiv}>
       <Checkbox
         checked={isSelected}
         onChange={() => onToggleSelect(itemId)}
@@ -32,12 +45,14 @@ const ActionItems: React.FC<ActionItemsProps> = ({
         <IconButton
           key={index}
           aria-label={action.label}
-          onClick={action.onClick}
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+            handleActionClick(action, event)
+          }
         >
           {action.icon}
         </IconButton>
       ))}
-    </>
+    </div>
   );
 };
 

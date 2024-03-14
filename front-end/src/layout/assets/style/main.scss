@@ -116,7 +116,12 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      height: 100%;
+
+      .card-actions-items {
+        width: 100%;
+        height: 100%;
+        cursor: default;
+      }
     }
 
     .card-img-avatar {

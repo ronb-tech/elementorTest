@@ -6,6 +6,7 @@ export interface User {
   createdAt: string;
   lastUpdated?: Date;
   limit?: number;
+  avatarUrl?: string;
 }
 
 export interface Album {

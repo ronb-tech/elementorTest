@@ -3,8 +3,9 @@ const fetch = require("node-fetch");
 import dotenv from "dotenv";
 dotenv.config();
 
-const baseUrl = process.env.JSONPLACEHOLDER_URL;
-const imagePath = process.env.PICSUM_URL;
+const baseUrl =
+  process.env.JSONPLACEHOLDER_URL || "https://jsonplaceholder.typicode.com/";
+const imagePath = process.env.PICSUM_URL || "https://picsum.photos/id/";
 
 export const getUsers = async (): Promise<User[]> => {
   try {
@@ -19,6 +20,7 @@ export const getUsers = async (): Promise<User[]> => {
         name: user.name,
         username: user.username,
         email: user.email,
+        avatarUrl: `https://robohash.org/${user.id}?set=set1`,
       };
     });
     return formattedUsers;

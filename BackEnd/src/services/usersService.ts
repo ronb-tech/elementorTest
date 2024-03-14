@@ -10,12 +10,7 @@ import {
   albumsCollection,
   photosCollection,
 } from "../utils/mongoSetup";
-
-import path from "path";
-import dotenv from "dotenv";
-dotenv.config();
-
-const useMongoDB = process.env.USE_MONGODB;
+import { fetchData } from "../models/dataHandler";
 
 export const getUsersData = async (
   usersFilePath: string = USERS_FILE_PATH,
@@ -24,22 +19,21 @@ export const getUsersData = async (
   let users: User[] = [];
   let albums: Album[] = [];
 
-  console.log("use mongo", useMongoDB);
-
   try {
-    if (!useMongoDB) {
-      const collection = await getCollection<User>(usersCollection);
-      users = await collection.find({}).toArray();
-    } else {
-      users = await readJsonFile<User[]>(usersFilePath);
-    }
+    users = await fetchData({
+      collectionName: usersCollection,
+      filePath: USERS_FILE_PATH,
+    });
   } catch (error) {
     console.error(`Failed to read users from file: ${usersFilePath}`, error);
     throw new Error("Failed to load user data");
   }
 
   try {
-    albums = await readJsonFile<Album[]>(albumsFilePath);
+    albums = await fetchData({
+      collectionName: albumsCollection,
+      filePath: ALBUMS_FILE_PATH,
+    });
   } catch (error) {
     console.error(`Failed to read albums from file: ${albumsFilePath}`, error);
     throw new Error("Failed to load album data");

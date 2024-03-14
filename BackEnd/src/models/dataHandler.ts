@@ -58,4 +58,10 @@ export const mapHandles = {
       filePath: ALBUMS_FILE_PATH,
     },
   },
+  photos: {
+    allImages: {
+      collectionName: photosCollection,
+      filePath: PHOTOS_FILE_PATH,
+    },
+  },
 };

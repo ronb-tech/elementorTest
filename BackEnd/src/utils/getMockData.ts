@@ -37,9 +37,10 @@ export const getAllalbums = async (): Promise<Album[]> => {
       throw new Error(`Error: ${response.status}`);
     }
     const albums = await response.json();
-    const formattedAlbums = albums.map(({ id, ...rest }: any) => ({
+    const formattedAlbums = albums.map(({ id, userId, ...rest }: any) => ({
       ...rest,
       _id: id,
+      user_id: userId,
     }));
 
     return formattedAlbums;

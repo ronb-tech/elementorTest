@@ -104,6 +104,8 @@
   grid-template-columns: repeat(3, minmax(240px, 1fr));
   gap: $spacing-xl;
   justify-content: center;
+  margin: $spacing-md 0;
+
 
   .card-item {
     box-shadow: $box-shadow;

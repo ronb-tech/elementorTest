@@ -24,7 +24,7 @@ export const getAlbumsByUserIdData = async (
 
   const formattedPhoto = albums.map((album) => {
     const firstAlbumThumb = photos?.find(
-      (photo) => photo.album_id === album._id
+      (photo) => photo.albumId === album._id
     )?.thumbnailUrl;
 
     return {

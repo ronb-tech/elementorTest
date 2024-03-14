@@ -13,7 +13,7 @@ export const getPhotos = async (req: Request, res: Response) => {
     }
     photos = await getAllPhotos();
     const photosByAlbumId = photos.filter(
-      (photo) => photo.album_id === album_id
+      (photo) => photo.albumId === album_id
     );
     res.json(photosByAlbumId || []);
   } catch (error) {

@@ -4,6 +4,7 @@ import { User } from "../utils/types";
 import { userServiceLogic } from "../services/index";
 import UsersList from "../components/usersList";
 import SkeletonCard from "../components/SkeletonCard";
+import { AddItems } from "../components/AddItems";
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -39,7 +40,7 @@ const UsersPage: React.FC = () => {
     console.log("onUserEdit", userId);
   };
 
-  const onUserAdd = (userId: number): void => {
+  const onAddUsers = (): void => {
     console.log("onUserAdd");
   };
 
@@ -62,13 +63,14 @@ const UsersPage: React.FC = () => {
   return (
     <div className="page-users">
       <h1>Users Page</h1>
+      <h3>you have {users.length} users </h3>
+      <AddItems text="users" addUsers={onAddUsers}></AddItems>
       {users.length > 0 ? (
         <UsersList
           users={users}
           onUserClick={onRedirectUser}
           onDeleteItem={onUserDelete}
           onEditItem={onUserEdit}
-          onAddItem={onUserAdd}
         ></UsersList>
       ) : (
         <div>No users found</div>

@@ -3,7 +3,6 @@ import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 
 interface ActionItem {
   actionId: string;
@@ -87,11 +86,5 @@ export const getActionsOptions = (
     icon: <DeleteIcon />,
     label: "delete",
     onClick: () => handleActionEvent("delete", id, onActionClick),
-  },
-  {
-    actionId: "add",
-    icon: <AddIcon />,
-    label: "add",
-    onClick: () => handleActionEvent("add", id, onActionClick),
   },
 ];

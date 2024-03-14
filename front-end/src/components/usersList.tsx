@@ -15,7 +15,6 @@ interface UsersListProps {
   onUserClick: (user_id: number) => void;
   onDeleteItem: (user_id: number) => void;
   onEditItem: (user_id: number) => void;
-  onAddItem: (user_id: number) => void;
 }
 
 const UsersList: React.FC<UsersListProps> = ({
@@ -23,7 +22,6 @@ const UsersList: React.FC<UsersListProps> = ({
   onUserClick,
   onDeleteItem,
   onEditItem,
-  onAddItem,
 }) => {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
 
@@ -39,9 +37,6 @@ const UsersList: React.FC<UsersListProps> = ({
     }
     if (actionId === "edit") {
       onEditItem(itemId);
-    }
-    if (actionId === "add") {
-      onAddItem(itemId);
     }
   };
 

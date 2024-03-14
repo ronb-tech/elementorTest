@@ -9,30 +9,22 @@
     align-items: center;
     gap: $spacing-lg;
 
+    .page-photos-top {}
+
     .modal-carousel {
         .modal-carousel {
             position: fixed;
-            /* Use fixed to keep the modal centered regardless of page scrolling */
             width: 50%;
             height: 50%;
             top: 50%;
-            /* Start from the middle of the screen */
             left: 50%;
-            /* Start from the middle of the screen */
             transform: translate(-50%, -50%);
-            /* Perfectly center the modal */
             background: white;
-            /* Consider adding a background for better visibility */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* Optional: adds some shadow for depth */
             padding: 20px;
-            /* Adds padding inside the modal */
             overflow-y: auto;
-            /* Allows scrolling inside the modal if content is too long */
             z-index: 1050;
-            /* Ensures the modal is above other content */
             border-radius: 8px;
-            /* Optional: rounds the corners for a smoother look */
         }
 
     }

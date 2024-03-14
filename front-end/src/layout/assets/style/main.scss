@@ -20,7 +20,7 @@
     text-align: center;
     width: 100%;
     padding: $spacing-xxl;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 324px);
 
   }
 
@@ -32,15 +32,43 @@
     background-color: $color-black;
     color: $color-white;
     width: 100%;
-    min-height: 80px;
-    height: auto;
-    padding: $spacing-sm;
+    height: $footer-height;
+    padding: $spacing-md;
+    color: $color-white;
+    gap: $spacing-md;
+
+
+    .contact {
+      font-weight: 600;
+      font-size: $font-size-lg;
+    }
+
+    .copyright {}
   }
 
   .header-toolbar {
     display: flex;
     justify-content: space-between;
     width: auto;
+    height: $header-height;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+    }
+
+    .header-left,
+    .header-right {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: $spacing-md;
+      height: 100%;
+    }
+
+    .header-right {
+      flex-direction: row-reverse;
+    }
   }
 
   h1,

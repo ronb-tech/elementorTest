@@ -51,8 +51,13 @@ const Photos: React.FC = () => {
 
   return (
     <div className="page-photos">
-      <h2>Photos in Album number {albumId}</h2>
-      <span>click on image to see the carousel</span>
+      <div className="page-photos-top">
+        <h5>
+          {photos.length} Photos in Album number {albumId}
+        </h5>
+        <span>click on the image to see the carousel</span>
+      </div>
+
       {photos.length > 0 ? (
         <>
           <PhotoList

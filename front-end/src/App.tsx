@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./utils/route";
 import "./layout/assets/style/main.scss";
 import { Footer } from "./layout/footer";
@@ -7,16 +7,15 @@ import { Header } from "./layout/header";
 
 const App: React.FC = () => {
   return (
-    <div className="app">
-      <Header></Header>
-      <div className="app-main">
-        <Router>
+    <BrowserRouter>
+      <div className="app">
+        <Header></Header>
+        <div className="app-main">
           <AppRoutes />
-        </Router>
+        </div>
+        <Footer></Footer>
       </div>
-
-      <Footer></Footer>
-    </div>
+    </BrowserRouter>
   );
 };
 

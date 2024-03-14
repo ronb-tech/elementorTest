@@ -112,7 +112,7 @@
     padding: 0;
 
     .card-actions {
-      border-top: 1px solid $color-black;
+      border-top: 1px solid $color-black-opacity;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -127,7 +127,7 @@
     .card-img-avatar {
       width: 100px;
       height: 100px;
-      border: 1px solid $color-dark;
+      border: 1px solid $color-black-opacity;
       border-radius: 100px;
       margin: $spacing-sm;
       box-shadow: $box-shadow;

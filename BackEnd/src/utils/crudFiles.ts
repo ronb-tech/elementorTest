@@ -13,3 +13,7 @@ export async function writeJsonFile<T>(
   const jsonData = JSON.stringify(data, null, 2);
   await fs.writeFile(filePath, jsonData, { encoding: "utf-8" });
 }
+
+export const USERS_FILE_PATH = path.join(__dirname, "data", "users.json");
+export const ALBUMS_FILE_PATH = path.join(__dirname, "data", "albums.json");
+export const PHOTOS_FILE_PATH = path.join(__dirname, "data", "photos.json");

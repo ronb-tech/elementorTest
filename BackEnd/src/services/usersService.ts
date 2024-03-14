@@ -1,9 +1,10 @@
 import { User, Album, Photo } from "../models/types";
-import { readJsonFile } from "@/utils/crudFiles";
+import {
+  readJsonFile,
+  USERS_FILE_PATH,
+  ALBUMS_FILE_PATH,
+} from "../utils/crudFiles";
 import path from "path";
-
-const USERS_FILE_PATH = path.join(__dirname, "utils", "data", "users.json");
-const ALBUMS_FILE_PATH = path.join(__dirname, "utils", "data", "albums.json");
 
 export const getUsersData = async (
   usersFilePath: string = USERS_FILE_PATH,

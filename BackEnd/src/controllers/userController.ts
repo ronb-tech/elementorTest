@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
 import { User } from "../models/types";
-import { getUsers } from "../utils/getMockData";
-
-let users: User[] = [];
+import { getUsersData } from "../services/usersService";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    users = await getUsers();
+    const users: User[] = (await getUsersData()) || [];
     if (users && users.length > 0) {
       res.json(users);
     } else {
@@ -18,8 +16,10 @@ export const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const getUserById = (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const users: User[] = (await getUsersData()) || [];
+
   const user = users.find((user) => user.id.toString() === id);
   if (user) {
     res.json(user);

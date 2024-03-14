@@ -6,6 +6,7 @@ import AlbumList from "../components/AlbumList";
 import SkeletonCard from "../components/SkeletonCard";
 import { AddItems } from "../components/AddItems";
 import DeleteDialog from "../components/DialogDelete";
+import useParsedParam from "../utils/useParsedParam";
 
 const AlbumsPage: React.FC = () => {
   const [albums, setAlbums] = useState<Album[]>([]);
@@ -17,11 +18,7 @@ const AlbumsPage: React.FC = () => {
   const [albumName, setAlbumName] = useState<string>("");
 
   const navigate = useNavigate();
-  let { userId } = useParams<"userId">();
-  let userIdNumber = userId ? parseInt(userId, 10) : 0;
-  if (isNaN(userIdNumber)) {
-    userIdNumber = 0;
-  }
+  const userId = useParsedParam("userId");
 
   const getAlbums = async (user_id: number): Promise<void> => {
     setIsLoading(true);
@@ -46,7 +43,7 @@ const AlbumsPage: React.FC = () => {
   const onAlbumDelete = (albumId: number): void => {
     const albumToDelete = albums.find((album) => album._id === albumId);
     if (albumToDelete) {
-      setAlbumName(albumToDelete.title); // Assuming your album object has a 'title' property
+      setAlbumName(albumToDelete.title);
       setItemIdToDelete(albumId);
       setDeleteDialogOpen(true);
     }
@@ -74,8 +71,7 @@ const AlbumsPage: React.FC = () => {
 
   useEffect(() => {
     if (userId) {
-      const user_id = parseInt(userId, 10);
-      getAlbums(user_id);
+      getAlbums(userId);
     }
   }, [userId]);
 

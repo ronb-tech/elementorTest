@@ -14,6 +14,8 @@ const AlbumForm: React.FC = () => {
 
   const navigate = useNavigate();
   let { albumId } = useParams<"albumId">();
+  let { userId } = useParams<"userId">();
+
   let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
   if (isNaN(albumIdNumber)) {
     albumIdNumber = 0;

@@ -16,6 +16,9 @@ front-end/node_modules/
 # Production build folder for FrontEnd
 front-end/build/
 front-end/dist/
+BackEnd/build/
+BackEnd/dist/
+
 
 # Optional: IDE specific settings
 .vscode/

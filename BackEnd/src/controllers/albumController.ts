@@ -4,7 +4,7 @@ import { getAllalbums } from "../utils/getMockData";
 
 let albums: Album[] = [];
 
-export const getAlbums = async (req: Request, res: Response) => {
+export const getAlbumsByUserId = async (req: Request, res: Response) => {
   const user_id = parseInt(req.params.user_id);
 
   try {

@@ -37,11 +37,11 @@ const UsersPage: React.FC = () => {
   };
 
   const onUserEdit = (userId: number): void => {
-    console.log("onUserEdit", userId);
+    navigate(`/user/${userId}`);
   };
 
   const onAddUsers = (): void => {
-    console.log("onUserAdd");
+    navigate(`/user`);
   };
 
   useEffect(() => {

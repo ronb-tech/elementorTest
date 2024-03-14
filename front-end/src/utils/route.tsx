@@ -12,7 +12,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/" element={<Navigate replace to="/users" />} />
       <Route path="*" element={<Page404 />} /> {}
       <Route path="/users" element={<UsersPage />} />
-      <Route path="/user/:userId" element={<UserForm />} />
+      <Route path="/user/:userId?" element={<UserForm />} />
       <Route path="/users/:userId/albums" element={<Albums />} />
       <Route path="/albums/:albumId/photos" element={<Photos />} />
     </Routes>

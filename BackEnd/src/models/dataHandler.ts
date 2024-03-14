@@ -45,14 +45,14 @@ export async function fetchData<T extends Document>({
   return data;
 }
 
-async function deleteItem<T extends Document>({
+export async function deleteItem<T extends Document>({
   collectionName,
   filePath,
   itemId,
 }: {
   collectionName?: string;
   filePath?: string;
-  itemId: string;
+  itemId: number;
 }): Promise<boolean> {
   const isUseMongoDB = process.env.USE_MONGODB === "true";
 

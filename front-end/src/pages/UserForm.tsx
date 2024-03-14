@@ -38,13 +38,20 @@ const UserForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form submitted:", user);
-    if (user._id) {
-      userServiceLogic.updateUser(user).then((res) => {
-        console.log("success, user updated", res);
-        navigate(`/users`);
-      });
+    if (user.name && user.username && user.email) {
+      if (user._id && user._id !== -1) {
+        userServiceLogic.updateUser(user).then((res) => {
+          console.log("success, user updated", res);
+          navigate(`/users`);
+        });
+      } else {
+        userServiceLogic.createUser(user).then((res) => {
+          console.log("success, user added", res);
+          navigate(`/users`);
+        });
+      }
     } else {
-      //   createUser(user); // Implement this function based on your API
+      alert("Form cannot be submitted with empty fields");
     }
   };
 

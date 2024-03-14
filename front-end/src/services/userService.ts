@@ -17,7 +17,7 @@ class userService {
   }
 
   async createUser(user: User) {
-    const response = await fetch(`${this.baseUrl}`, {
+    const response = await fetch(`${this.baseUrl}/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

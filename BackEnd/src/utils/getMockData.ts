@@ -37,12 +37,11 @@ export const getAllalbums = async (): Promise<Album[]> => {
       throw new Error(`Error: ${response.status}`);
     }
     const albums = await response.json();
-    const formattedAlbums = albums.map((album: any) => {
-      return {
-        ...album,
-        _id: album.id,
-      };
-    });
+    const formattedAlbums = albums.map(({ id, ...rest }: any) => ({
+      ...rest,
+      _id: id,
+    }));
+
     return formattedAlbums;
   } catch (err) {
     console.error("getAlbums", err);
@@ -60,14 +59,12 @@ export const getAllPhotos = async (): Promise<Photo[]> => {
     const imageDeafultSize = 600;
     const imageThumbSize = 200;
 
-    const photosFormat = photos.map((photo: any) => {
-      return {
-        ...photo,
-        _id: photo.id,
-        url: `${imagePath}${photo.id}/${imageDeafultSize}/${imageDeafultSize}`,
-        thumbnailUrl: `${imagePath}${photo.id}/${imageThumbSize}/${imageThumbSize}`,
-      };
-    });
+    const photosFormat = photos.map(({ id, ...rest }: any) => ({
+      ...rest,
+      _id: id,
+      url: `${imagePath}${id}/${imageDeafultSize}/${imageDeafultSize}`,
+      thumbnailUrl: `${imagePath}${id}/${imageThumbSize}/${imageThumbSize}`,
+    }));
 
     return photosFormat;
   } catch (err) {

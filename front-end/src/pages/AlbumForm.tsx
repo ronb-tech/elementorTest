@@ -13,10 +13,10 @@ const AlbumForm: React.FC = () => {
   });
 
   const navigate = useNavigate();
-  let { userId } = useParams<"userId">();
-  let userIdNumber = userId ? parseInt(userId, 10) : 0;
-  if (isNaN(userIdNumber)) {
-    userIdNumber = 0;
+  let { albumId } = useParams<"albumId">();
+  let albumIdNumber = albumId ? parseInt(albumId, 10) : 0;
+  if (isNaN(albumIdNumber)) {
+    albumIdNumber = 0;
   }
 
   useEffect(() => {
@@ -25,10 +25,10 @@ const AlbumForm: React.FC = () => {
       setAlbum(albumData);
     };
 
-    if (userIdNumber) {
-      fetchAlbumData(userIdNumber);
+    if (albumIdNumber) {
+      fetchAlbumData(albumIdNumber);
     }
-  }, [userIdNumber]);
+  }, [albumIdNumber]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -42,7 +42,7 @@ const AlbumForm: React.FC = () => {
       if (album._id && album._id !== -1) {
         albumServiceLogic.updateAlbum(album).then((res) => {
           console.log("success, album updated", res);
-          navigate(`/users/${userIdNumber}/albums`);
+          navigate(`/users/${albumIdNumber}/albums`);
         });
       } else {
         albumServiceLogic.createAlbum(album).then((res) => {
@@ -58,7 +58,7 @@ const AlbumForm: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1">
-        {userIdNumber ? "Edit Album" : "Add Album"}
+        {albumIdNumber ? "Edit Album" : "Add Album"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -84,7 +84,7 @@ const AlbumForm: React.FC = () => {
           color="primary"
           style={{ marginTop: "20px" }}
         >
-          {userIdNumber ? "Update" : "Create"}
+          {albumIdNumber ? "Update" : "Create"}
         </Button>
       </form>
     </Container>

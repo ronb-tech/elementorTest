@@ -15,7 +15,7 @@ export const AppRoutes: React.FC = () => {
       <Route path="/users" element={<UsersPage />} />
       <Route path="/user/form/:userId?" element={<UserForm />} />
       <Route path="/users/:userId/albums" element={<Albums />} />
-      <Route path="/users/:userId/albumForm" element={<AlbumForm />} />
+      <Route path="/albumForm/:albumId" element={<AlbumForm />} />
       <Route path="/albums/:albumId/photos" element={<Photos />} />
     </Routes>
   );

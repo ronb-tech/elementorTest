@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
+
 import Slider from "react-slick";
 import { Photo } from "../utils/types";
 import "slick-carousel/slick/slick.css";
@@ -19,7 +20,7 @@ const Carousel: React.FC<CarouselProps> = ({ photos, currentImageIndex }) => {
     slidesToScroll: 1,
   };
 
-  const styleModal = {
+  const styleModal: CSSProperties = {
     position: "absolute",
     width: "500px",
     height: "500px",
@@ -29,7 +30,7 @@ const Carousel: React.FC<CarouselProps> = ({ photos, currentImageIndex }) => {
     zIndex: "1999",
   };
 
-  const styleCarousel = {
+  const styleCarousel: CSSProperties = {
     width: "100%",
     height: "100%",
     margin: "0 auto",

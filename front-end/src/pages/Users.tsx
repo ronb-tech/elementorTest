@@ -31,6 +31,18 @@ const UsersPage: React.FC = () => {
     navigate(`/users/${userId}/albums`);
   };
 
+  const onUserDelete = (userId: number): void => {
+    console.log("onUserDelete", userId);
+  };
+
+  const onUserEdit = (userId: number): void => {
+    console.log("onUserEdit", userId);
+  };
+
+  const onUserAdd = (userId: number): void => {
+    console.log("onUserAdd");
+  };
+
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -51,7 +63,13 @@ const UsersPage: React.FC = () => {
     <div className="page-users">
       <h1>Users Page</h1>
       {users.length > 0 ? (
-        <UsersList users={users} onUserClick={onRedirectUser}></UsersList>
+        <UsersList
+          users={users}
+          onUserClick={onRedirectUser}
+          onDeleteItem={onUserDelete}
+          onEditItem={onUserEdit}
+          onAddItem={onUserAdd}
+        ></UsersList>
       ) : (
         <div>No users found</div>
       )}

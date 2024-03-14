@@ -13,9 +13,18 @@ import { ActionItems, getActionsOptions } from "./ActionItems";
 interface UsersListProps {
   users: User[];
   onUserClick: (user_id: number) => void;
+  onDeleteItem: (user_id: number) => void;
+  onEditItem: (user_id: number) => void;
+  onAddItem: (user_id: number) => void;
 }
 
-const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
+const UsersList: React.FC<UsersListProps> = ({
+  users,
+  onUserClick,
+  onDeleteItem,
+  onEditItem,
+  onAddItem,
+}) => {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
 
   const actionsOptions = (id: number) => getActionsOptions(id, onActionClick);
@@ -25,9 +34,15 @@ const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
   };
 
   const onActionClick = (actionId: string, itemId: number) => {
-    console.log(`Action ${actionId} clicked for item ${itemId}`);
-    // Implement specific logic based on actionId, e.g., edit, delete, add
-    // This might involve setting state, calling APIs, etc.
+    if (actionId === "delete") {
+      onDeleteItem(itemId);
+    }
+    if (actionId === "edit") {
+      onEditItem(itemId);
+    }
+    if (actionId === "add") {
+      onAddItem(itemId);
+    }
   };
 
   return (

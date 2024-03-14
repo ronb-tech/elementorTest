@@ -4,6 +4,7 @@ import { Album } from "../utils/types";
 import { albumServiceLogic } from "../services/index";
 import SkeletonCard from "../components/SkeletonCard";
 import AlbumList from "../components/albumList";
+import { AddItems } from "../components/AddItems";
 
 const Albums: React.FC = () => {
   const [albums, setAlbums] = useState<Album[]>([]);
@@ -42,6 +43,10 @@ const Albums: React.FC = () => {
     getAlbums(userIdNumber);
   }, [userIdNumber]);
 
+  const onAddAlbum = (): void => {
+    navigate(`/albums/albumForm`);
+  };
+
   if (isLoading) {
     return (
       <>
@@ -57,6 +62,9 @@ const Albums: React.FC = () => {
   return (
     <div className="page-album">
       <h2>Albums Page, for user {userId}</h2>
+      <h3>you have {albums.length} Albums </h3>
+      <AddItems text="albums" addUsers={onAddAlbum}></AddItems>
+
       {albums.length > 0 ? (
         <div>
           <AlbumList albums={albums} onAlbumClick={onRedirectAlbum}></AlbumList>

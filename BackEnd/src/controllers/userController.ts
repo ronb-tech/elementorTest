@@ -7,9 +7,12 @@ let users: User[] = [];
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     users = await getUsers();
-    res.json(users);
+    if (users && users.length > 0) {
+      res.json(users);
+    } else {
+      throw new Error("No users found");
+    }
   } catch (error) {
-    //log the error
     console.error("Failed to fetch users:", error);
     res.status(500).json({ message: "Failed to fetch users" });
   }

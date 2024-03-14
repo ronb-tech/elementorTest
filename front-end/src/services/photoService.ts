@@ -18,7 +18,7 @@ class PhotoService {
   }
 
   async createPhoto(photo: Photo) {
-    const response = await fetch(this.baseUrl, {
+    const response = await fetch(`${this.baseUrl}/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,8 +28,8 @@ class PhotoService {
     return await response.json();
   }
 
-  async updatePhoto(id: number, photo: Photo) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+  async updatePhoto(photo: Photo) {
+    const response = await fetch(`${this.baseUrl}/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -40,10 +40,11 @@ class PhotoService {
   }
 
   async deletePhoto(id: number) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+    const response = await fetch(`${this.baseUrl}/delete/${id}`, {
       method: "DELETE",
     });
-    return await response.ok;
+    const data = await response.json();
+    return data.ok;
   }
 }
 

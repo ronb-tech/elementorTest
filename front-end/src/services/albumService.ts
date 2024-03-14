@@ -18,7 +18,7 @@ class AlbumService {
   }
 
   async createAlbum(album: Album) {
-    const response = await fetch(this.baseUrl, {
+    const response = await fetch(`${this.baseUrl}/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,8 +28,8 @@ class AlbumService {
     return await response.json();
   }
 
-  async updateAlbum(id: number, album: Album) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+  async updateAlbum(album: Album) {
+    const response = await fetch(`${this.baseUrl}/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ class AlbumService {
   }
 
   async deleteAlbum(id: number) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+    const response = await fetch(`${this.baseUrl}/delete/${id}`, {
       method: "DELETE",
     });
     return await response.ok;

@@ -17,10 +17,17 @@ interface UsersListProps {
 
 const UsersList: React.FC<UsersListProps> = ({ users, onUserClick }) => {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
-  const actionsOptions = (id: number) => getActionsOptions(id);
+
+  const actionsOptions = (id: number) => getActionsOptions(id, onActionClick);
 
   const onToggleSelectItem = (item: any) => {
     console.log("onToggleSelectItem", item);
+  };
+
+  const onActionClick = (actionId: string, itemId: number) => {
+    console.log(`Action ${actionId} clicked for item ${itemId}`);
+    // Implement specific logic based on actionId, e.g., edit, delete, add
+    // This might involve setting state, calling APIs, etc.
   };
 
   return (

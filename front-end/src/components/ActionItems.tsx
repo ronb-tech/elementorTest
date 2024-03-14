@@ -17,6 +17,11 @@ interface ActionItemsProps {
   isSelected: boolean;
   onToggleSelect: (itemId: number | string) => void;
   actions: ActionItem[];
+  onActionClick?: (
+    actionId: string,
+    itemId: number | string,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
 }
 
 export const ActionItems: React.FC<ActionItemsProps> = ({
@@ -59,28 +64,34 @@ export const ActionItems: React.FC<ActionItemsProps> = ({
   );
 };
 
-const handleActionEvent = (actionId: string, itemId: number): void => {
-  console.log("action name", actionId);
-  console.log("action item id", actionId);
+const handleActionEvent = (
+  actionId: string,
+  itemId: number,
+  callback: (actionId: string, itemId: number) => void
+): void => {
+  callback(actionId, itemId);
 };
 
-export const getActionsOptions = (id: number) => [
+export const getActionsOptions = (
+  id: number,
+  onActionClick: (actionId: string, itemId: number) => void
+) => [
   {
     actionId: "edit",
     icon: <EditIcon />,
     label: "edit",
-    onClick: () => handleActionEvent("edit", id),
+    onClick: () => handleActionEvent("edit", id, onActionClick),
   },
   {
     actionId: "delete",
     icon: <DeleteIcon />,
     label: "delete",
-    onClick: () => handleActionEvent("delete", id),
+    onClick: () => handleActionEvent("delete", id, onActionClick),
   },
   {
     actionId: "add",
     icon: <AddIcon />,
     label: "add",
-    onClick: () => handleActionEvent("add", id),
+    onClick: () => handleActionEvent("add", id, onActionClick),
   },
 ];

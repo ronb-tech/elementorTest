@@ -86,6 +86,45 @@ export async function updateItem<T extends Document>({
   }
 }
 
+export async function addItem<T extends Document>({
+  collectionName,
+  filePath,
+  item,
+  lastId,
+}: {
+  collectionName?: string;
+  filePath?: string;
+  item: T;
+  lastId?: number;
+}): Promise<boolean> {
+  const isUseMongoDB = process.env.USE_MONGODB === "true";
+
+  if (isUseMongoDB) {
+    if (!collectionName) {
+      throw new Error(
+        "MongoDB collection name must be provided when using MongoDB."
+      );
+    }
+    // const collection = await getCollection<T>(collectionName);
+    // const response = await collection.insertOne(item as any);
+    // return { ...item, _id: response.insertedId };
+    return false;
+  } else {
+    if (!filePath) {
+      throw new Error("File path must be provided when not using MongoDB.");
+    }
+    const items = await readJsonFile<T[]>(filePath);
+    const nextId =
+      lastId !== undefined
+        ? lastId + 1
+        : Math.max(0, ...items.map((item) => item._id || 0)) + 1;
+    const newItem = { ...item, _id: nextId };
+    items.push(newItem as T);
+    await writeJsonFile(filePath, items);
+    return true;
+  }
+}
+
 export async function deleteItem<T extends Document>({
   collectionName,
   filePath,

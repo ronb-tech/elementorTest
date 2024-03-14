@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { User } from "../models/types";
 import { getAllUsersData } from "../services/usersService";
-import { deleteItem, updateItem, mapHandles } from "../models/dataHandler";
+import {
+  deleteItem,
+  updateItem,
+  addItem,
+  mapHandles,
+} from "../models/dataHandler";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -49,6 +54,25 @@ export const updateUser = async (req: Request, res: Response) => {
       } else {
         res.status(404).send({ message: "User not found", ok: false });
       }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send({ message: "Server error", ok: false });
+    });
+};
+
+export const addUser = async (req: Request, res: Response) => {
+  const userData = req.body;
+  if (!userData) {
+    return res.status(400).send({ message: "User data is missing", ok: false });
+  }
+
+  addItem({
+    ...mapHandles.users.allUsers,
+    item: userData,
+  })
+    .then((isAdded) => {
+      res.status(201).send({ message: "User added successfully", ok: isAdded });
     })
     .catch((error) => {
       console.error(error);

@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import { useAppUser } from "../context/UserAppContext";
+import Logo from "../layout/assets/images/logo.svg";
 
 export const Header: React.FC = () => {
   const { appUser, toggleAdmin } = useAppUser();
@@ -14,7 +15,7 @@ export const Header: React.FC = () => {
       <Toolbar className="header-toolbar">
         <div className="header-left">
           <Link component={RouterLink} color="inherit" to="/" variant="h6">
-            <Typography>Main App</Typography>
+            <img className="app-logo" src={Logo} alt=""></img>
           </Link>
           <Link component={RouterLink} color="inherit" to="/users" variant="h6">
             <Typography>Users</Typography>

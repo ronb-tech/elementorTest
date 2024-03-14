@@ -53,6 +53,11 @@
     height: $header-height;
     align-items: center;
 
+    .app-logo {
+      width: 70px;
+      height: 100%;
+    }
+
     a {
       text-decoration: none;
     }

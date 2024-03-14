@@ -12,10 +12,9 @@ export const getAlbums = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid 'user_id' provided." });
     }
     albums = await getAllalbums();
-    const albumsByUserId = albums.filter((album) => album.userId === user_id);
+    const albumsByUserId = albums.filter((album) => album.user_id === user_id);
     res.json(albumsByUserId || []);
   } catch (error) {
-    //log the error
     console.error("Failed to fetch albums:", error);
     res.status(500).json({ message: "Failed to fetch albums" });
   }

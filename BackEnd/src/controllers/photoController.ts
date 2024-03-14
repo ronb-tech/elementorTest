@@ -13,11 +13,10 @@ export const getPhotos = async (req: Request, res: Response) => {
     }
     photos = await getAllPhotos();
     const photosByAlbumId = photos.filter(
-      (photo) => photo.albumId === album_id
+      (photo) => photo.album_id === album_id
     );
     res.json(photosByAlbumId || []);
   } catch (error) {
-    //log the error
     console.error("Failed to fetch photos:", error);
     res.status(500).json({ message: "Failed to fetch photos" });
   }

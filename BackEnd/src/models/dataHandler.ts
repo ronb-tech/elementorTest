@@ -12,12 +12,13 @@ import {
   photosCollection,
 } from "../utils/mongoSetup";
 
+import { Document } from "mongodb";
 import { User, Album, Photo } from "../models/types";
 
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function fetchData<T>({
+export async function fetchData<T extends Document>({
   collectionName,
   filePath,
 }: {
@@ -26,7 +27,6 @@ export async function fetchData<T>({
 }): Promise<T[]> {
   let data: T[] = [];
   const isUseMongoDB = process.env.USE_MONGODB === "true";
-
   if (isUseMongoDB) {
     if (!collectionName) {
       throw new Error(
@@ -34,12 +34,11 @@ export async function fetchData<T>({
       );
     }
     const collection = await getCollection<T>(collectionName);
-    data = await collection.find({}).toArray();
+    data = (await collection.find({}).toArray()) as T[];
   } else {
     if (!filePath) {
       throw new Error("File path must be provided when not using MongoDB.");
     }
-
     data = await readJsonFile<T[]>(filePath);
   }
 

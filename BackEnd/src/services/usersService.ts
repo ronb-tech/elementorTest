@@ -18,13 +18,13 @@ export const getAllUsersData = async (): Promise<User[]> => {
   }
 
   const albumCountByUserId = albums.reduce((acc, album) => {
-    acc[album.userId] = (acc[album.userId] || 0) + 1;
+    acc[album.user_id] = (acc[album.user_id] || 0) + 1;
     return acc;
   }, {} as Record<number, number>);
 
   const usersWithAlbumCount = users.map((user) => ({
     ...user,
-    albumCount: albumCountByUserId[user.id] || 0,
+    albumCount: albumCountByUserId[user._id] || 0,
   }));
 
   return usersWithAlbumCount;

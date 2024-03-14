@@ -19,7 +19,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const users: User[] = await getAllUsersData();
-  const user = users.find((user) => user.id.toString() === id);
+  const user = users.find((user) => user._id.toString() === id);
 
   if (user) {
     res.json(user);

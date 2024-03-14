@@ -16,7 +16,7 @@ export const getUsers = async (): Promise<User[]> => {
     const users = await response.json();
     const formattedUsers = users.map((user: any) => {
       return {
-        id: user.id,
+        _id: user.id,
         name: user.name,
         username: user.username,
         email: user.email,
@@ -37,8 +37,13 @@ export const getAllalbums = async (): Promise<Album[]> => {
       throw new Error(`Error: ${response.status}`);
     }
     const albums = await response.json();
-
-    return albums;
+    const formattedAlbums = albums.map((album: any) => {
+      return {
+        ...album,
+        _id: album.id,
+      };
+    });
+    return formattedAlbums;
   } catch (err) {
     console.error("getAlbums", err);
     return [];
@@ -58,6 +63,7 @@ export const getAllPhotos = async (): Promise<Photo[]> => {
     const photosFormat = photos.map((photo: any) => {
       return {
         ...photo,
+        _id: photo.id,
         url: `${imagePath}${photo.id}/${imageDeafultSize}/${imageDeafultSize}`,
         thumbnailUrl: `${imagePath}${photo.id}/${imageThumbSize}/${imageThumbSize}`,
       };

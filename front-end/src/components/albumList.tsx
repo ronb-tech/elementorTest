@@ -6,13 +6,13 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import { Album } from "../utils/types";
 import { onImgError } from "../utils/helper";
-import { ActionItems, getActionsOptions } from "./ActionItems"; // Ensure these are generic
+import { ActionItems, getActionsOptions } from "./ActionItems";
 
 interface AlbumListProps {
   albums: Album[];
   onAlbumClick: (albumId: number) => void;
-  onDeleteItem: (albumId: number) => void; // Assuming you're adding this
-  onEditItem: (albumId: number) => void; // Assuming you're adding this
+  onDeleteItem: (albumId: number) => void;
+  onEditItem: (albumId: number) => void;
 }
 
 const AlbumList: React.FC<AlbumListProps> = ({
@@ -21,7 +21,6 @@ const AlbumList: React.FC<AlbumListProps> = ({
   onDeleteItem,
   onEditItem,
 }) => {
-  // Adjust actionsOptions to suit albums if necessary
   const actionsOptions = (id: number) => getActionsOptions(id, onActionClick);
 
   const onActionClick = (actionId: string, itemId: number) => {
@@ -31,7 +30,6 @@ const AlbumList: React.FC<AlbumListProps> = ({
     if (actionId === "edit") {
       onEditItem(itemId);
     }
-    // Add more actions as needed
   };
 
   return (

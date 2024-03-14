@@ -35,7 +35,11 @@ const AlbumList: React.FC<AlbumListProps> = ({
   return (
     <div className="card-list">
       {albums.map((album) => (
-        <Card className="card-item" key={album._id}>
+        <Card
+          className="card-item"
+          key={album._id}
+          onClick={() => onAlbumClick(album._id)}
+        >
           <CardMedia
             component="img"
             className="card-img"
@@ -43,7 +47,7 @@ const AlbumList: React.FC<AlbumListProps> = ({
             title={album.title}
             onError={onImgError}
           />
-          <CardContent onClick={() => onAlbumClick(album._id)}>
+          <CardContent>
             <Typography variant="body2">
               <b>Album Name: </b>
               {album.title}

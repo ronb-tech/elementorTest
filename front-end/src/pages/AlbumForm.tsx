@@ -6,16 +6,16 @@ import { albumServiceLogic } from "../services/index";
 import useParsedParam from "../utils/useParsedParam";
 
 const AlbumForm: React.FC = () => {
-  const [album, setAlbum] = useState<Album>({
-    _id: -1,
-    user_id: -1,
-    title: "",
-    thumbnailUrl: "",
-  });
-
   const navigate = useNavigate();
   const albumId = useParsedParam("albumId");
   const userId = useParsedParam("userId");
+
+  const [album, setAlbum] = useState<Album>({
+    _id: -1,
+    user_id: userId || -1,
+    title: "",
+    thumbnailUrl: "",
+  });
 
   useEffect(() => {
     const fetchAlbumData = async (id: number) => {
@@ -45,7 +45,7 @@ const AlbumForm: React.FC = () => {
       } else {
         albumServiceLogic.createAlbum(album).then((res) => {
           console.log("success, album added", res);
-          navigate(`/users/${album.user_id}/albums`);
+          navigate(`/users/${userId}/albums/`);
         });
       }
     } else {

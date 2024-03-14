@@ -41,6 +41,7 @@ const UserForm: React.FC = () => {
     if (user._id) {
       userServiceLogic.updateUser(user).then((res) => {
         console.log("success, user updated", res);
+        navigate(`/users`);
       });
     } else {
       //   createUser(user); // Implement this function based on your API

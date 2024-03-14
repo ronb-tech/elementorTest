@@ -30,7 +30,6 @@ export const getUserById = async (req: Request, res: Response) => {
 };
 
 export const updateUser = async (req: Request, res: Response) => {
-  // const { id } = req.params;
   const updateData = req?.body;
   if (!updateData && !updateData._id) {
     return res

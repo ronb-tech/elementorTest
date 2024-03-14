@@ -5,11 +5,17 @@ import { userServiceLogic } from "../services/index";
 import UsersList from "../components/usersList";
 import SkeletonCard from "../components/SkeletonCard";
 import { AddItems } from "../components/AddItems";
+import DeleteDialog from "../components/DialogDelete";
 
 const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [itemIdToDelete, setItemIdToDelete] = useState<number | null>(null);
+  const [itemName, setItemName] = useState<string>("");
+
   const navigate = useNavigate();
 
   const getAllUsers = async (): Promise<void> => {
@@ -34,6 +40,8 @@ const UsersPage: React.FC = () => {
 
   const onUserDelete = (userId: number): void => {
     console.log("onUserDelete", userId);
+    const itemName = users?.find((usr) => usr._id == userId)?.name || "";
+    handleRequestDelete(userId, itemName);
   };
 
   const onUserEdit = (userId: number): void => {
@@ -42,6 +50,21 @@ const UsersPage: React.FC = () => {
 
   const onAddUsers = (): void => {
     navigate(`/user`);
+  };
+
+  const handleRequestDelete = (itemId: number, itemName: string) => {
+    setItemIdToDelete(itemId);
+    setItemName(itemName);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setDeleteDialogOpen(false);
+  };
+
+  const handleConfirmDelete = (itemId: number) => {
+    console.log(`Deleting ${itemName}`, itemId);
+    handleCloseDeleteDialog();
   };
 
   useEffect(() => {
@@ -65,13 +88,23 @@ const UsersPage: React.FC = () => {
       <h1>Users Page</h1>
       <h3>you have {users.length} users </h3>
       <AddItems text="users" addUsers={onAddUsers}></AddItems>
+
       {users.length > 0 ? (
-        <UsersList
-          users={users}
-          onUserClick={onRedirectUser}
-          onDeleteItem={onUserDelete}
-          onEditItem={onUserEdit}
-        ></UsersList>
+        <>
+          <DeleteDialog
+            open={deleteDialogOpen}
+            itemId={itemIdToDelete}
+            itemName={itemName}
+            onClose={handleCloseDeleteDialog}
+            onConfirm={handleConfirmDelete}
+          />
+          <UsersList
+            users={users}
+            onUserClick={onRedirectUser}
+            onDeleteItem={onUserDelete}
+            onEditItem={onUserEdit}
+          ></UsersList>
+        </>
       ) : (
         <div>No users found</div>
       )}

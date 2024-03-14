@@ -11,7 +11,8 @@ interface PhotoListProps {
 
 const PhotoList: React.FC<PhotoListProps> = ({ photos, onImgClick }) => {
   const onImgError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    const fallbackImg = "https://picsum.photos/300/300";
+    const fallbackImg =
+      "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
     console.log("onImgError", fallbackImg);
     event.currentTarget.src = fallbackImg;
   };

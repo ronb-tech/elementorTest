@@ -38,12 +38,13 @@ const UserForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form submitted:", user);
-    // Implement submission logic here, for example:
-    // if (user._id) {
-    //   updateUser(user); // Implement this function based on your API
-    // } else {
-    //   createUser(user); // Implement this function based on your API
-    // }
+    if (user._id) {
+      userServiceLogic.updateUser(user).then((res) => {
+        console.log("success, user updated", res);
+      });
+    } else {
+      //   createUser(user); // Implement this function based on your API
+    }
   };
 
   return (

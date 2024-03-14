@@ -27,8 +27,8 @@ class userService {
     return await response.json();
   }
 
-  async updateUser(id: number, user: User) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+  async updateUser(user: User) {
+    const response = await fetch(`${this.baseUrl}/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

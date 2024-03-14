@@ -10,6 +10,6 @@ const userRoutes = express.Router();
 userRoutes.get("/", getAllUsers);
 userRoutes.get("/:id", getUserById);
 userRoutes.delete("/delete/:id", deleteUserById);
-userRoutes.post("/update", updateUser);
+userRoutes.put("/update", updateUser);
 
 export default userRoutes;

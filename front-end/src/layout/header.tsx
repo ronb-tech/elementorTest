@@ -4,8 +4,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
+import { useAppUser } from "../context/UserAppContext";
 
 export const Header: React.FC = () => {
+  const { appUser, toggleAdmin } = useAppUser();
+
   return (
     <AppBar position="static">
       <Toolbar className="header-toolbar">
@@ -20,7 +23,9 @@ export const Header: React.FC = () => {
 
         <div className="header-right">
           <Typography variant="h6" component="div">
-            Hello, Admin
+            {appUser.isAdmin
+              ? `Hello, ${appUser.userName} (Admin)`
+              : `Hello, ${appUser.userName}`}
           </Typography>
         </div>
       </Toolbar>

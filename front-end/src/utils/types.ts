@@ -25,3 +25,10 @@ export interface Photo {
   amout?: number;
   limit?: number;
 }
+
+export interface AppUser {
+  userName: string;
+  id: number;
+  isAdmin: boolean;
+  email?: string;
+}

@@ -29,7 +29,7 @@ export const getAlbumsByUserIdData = async (
 
     return {
       ...album,
-      thumbnailUrl: firstAlbumThumb || "",
+      thumbnailUrl: album?.thumbnailUrl || firstAlbumThumb || "",
     };
   });
 

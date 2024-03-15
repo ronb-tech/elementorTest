@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Album } from "../utils/types";
 import { albumServiceLogic } from "../services/index";
-import AlbumList from "../components/AlbumList";
+import AlbumList from "../components/albumList";
 import SkeletonCard from "../components/SkeletonCard";
 import { AddItems } from "../components/AddItems";
 import DeleteDialog from "../components/DialogDelete";

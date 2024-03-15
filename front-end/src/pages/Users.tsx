@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../utils/types";
 import { userServiceLogic } from "../services/index";
-import UsersList from "../components/UsersList";
+import UsersList from "../components/usersList";
 import SkeletonCard from "../components/SkeletonCard";
 import { AddItems } from "../components/AddItems";
 import DeleteDialog from "../components/DialogDelete";

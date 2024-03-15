@@ -63,3 +63,25 @@ export const updateAlbum = async (req: Request, res: Response) => {
       res.status(500).send({ message: "Server error", ok: false });
     });
 };
+
+export const deleteAlbumById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const albums: Album[] = await getAlbumsByUserIdData(parseInt(id, 10));
+  const album = await albums.find((album) => album._id.toString() === id);
+  if (album) {
+    deleteItem({
+      ...mapHandles.albums.allAlbums,
+      itemId: album?._id,
+    })
+      .then((response) => {
+        if (response) {
+          return res.status(200).send({ message: "album deleted", ok: true });
+        }
+      })
+      .catch(() => {
+        return res.status(404).send({ message: "album not found", ok: false });
+      });
+  } else {
+    res.status(500).send("Server error");
+  }
+};

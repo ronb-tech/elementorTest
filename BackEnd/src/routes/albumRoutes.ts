@@ -1,10 +1,8 @@
 import express from "express";
-import {
-  getAllAlbumsByUserId,
-  getAlbumsByUserId,
-} from "../controllers/albumController";
+import { getAllAlbumsByUserId } from "../controllers/albumController";
 
 const albumRoutes = express.Router();
-albumRoutes.get("/:user_id", getAllAlbumsByUserId);
+
+albumRoutes.get("/", getAllAlbumsByUserId);
 
 export default albumRoutes;

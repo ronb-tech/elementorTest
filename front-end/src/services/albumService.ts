@@ -13,7 +13,7 @@ class AlbumService {
   }
 
   async getAlbumById(id: number) {
-    const response = await fetch(`${this.baseUrl}/${id}`);
+    const response = await fetch(`${this.baseUrl}?user_id=${id}`);
     return await response.json();
   }
 

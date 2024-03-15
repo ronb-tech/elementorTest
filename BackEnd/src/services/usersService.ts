@@ -1,11 +1,16 @@
 import { User, Album, Photo } from "../models/types";
 import { fetchData, mapHandles } from "../models/dataHandler";
 
+import UserModel from "../models/userModel";
+
 export const getAllUsersData = async (): Promise<User[]> => {
   let users: User[] = [];
   let albums: Album[] = [];
 
   try {
+    //just for the example for getting from mongoDB
+    const usersFromMongo: User[] = await UserModel.find().lean();
+
     users = await fetchData(mapHandles.users.allUsers);
   } catch (error) {
     throw new Error("Failed to load user data");

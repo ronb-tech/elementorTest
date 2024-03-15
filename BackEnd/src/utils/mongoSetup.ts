@@ -1,7 +1,12 @@
 import { MongoClient, Collection, Document } from "mongodb";
+const mongoose = require("mongoose");
 
-const url = "mongodb://yourMongoDBUrl";
-const dbName = "yourDbName";
+//will be stored as secred keys...
+const username = "ronbersh";
+const password = encodeURIComponent("QG85@uv*a%5k8EW");
+const clusterAddress = "cluster0.eqgi702.mongodb.net";
+const dbName = "testDB";
+const url = `mongodb+srv://${username}:${password}@${clusterAddress}/${dbName}?retryWrites=true&w=majority`;
 
 const usersCollection = "users";
 const albumsCollection = "albums";
@@ -16,3 +21,12 @@ export async function getCollection<T extends Document>(
 }
 
 export { usersCollection, albumsCollection, photosCollection };
+
+export const startMongo = async () => {
+  mongoose
+    .connect(`${url}/${dbName}`, {})
+    .then(() => {
+      console.log("Connected to MongoDB...");
+    })
+    .catch((err: any) => console.error("Could not connect to MongoDB...", err));
+};

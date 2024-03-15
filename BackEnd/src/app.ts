@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import routes from "./routes";
 import { initData } from "./utils/generateData";
+import { startMongo } from "./utils/mongoSetup";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 4000;
 const startServer = async () => {
   try {
     await initData();
+    await startMongo();
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });

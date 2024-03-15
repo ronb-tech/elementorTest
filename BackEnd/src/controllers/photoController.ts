@@ -44,10 +44,11 @@ export const addPhoto = async (req: Request, res: Response) => {
       ...mapHandles.photos.allImages,
       item: photoData,
     });
-    if (response) {
-      res
-        .status(201)
-        .send({ message: "Photo added successfully", response, ok: true });
+    if (response.ok) {
+      res.status(201).send({
+        response,
+        ok: response.ok,
+      });
     } else {
       throw new Error("Failed to add photo");
     }

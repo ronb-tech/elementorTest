@@ -69,6 +69,8 @@ const PhotosForm: React.FC = () => {
           onChange={handleChange}
           inputProps={{
             step: "1",
+            max: "10",
+            min: "1",
           }}
         />
 

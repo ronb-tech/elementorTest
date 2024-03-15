@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Album } from "../utils/types";
-import { albumServiceLogic } from "../services/index";
+import { Photo } from "../utils/types";
+import { photoServiceLogic } from "../services/index";
 import useParsedParam from "../utils/useParsedParam";
 
 const PhotosForm: React.FC = () => {
@@ -11,26 +11,26 @@ const PhotosForm: React.FC = () => {
   const userIdParam = useParsedParam("userId");
   console.log(albumId, userIdParam);
 
-  const [photo, setPhoto] = useState<Album>({
+  const [photo, setPhoto] = useState<Photo>({
     _id: 0,
-    userId: userIdParam,
+    album_id: albumId,
     title: "",
-    thumbnailUrl: "",
+    url: "",
   });
 
-  useEffect(() => {
-    const fetchAlbumData = async (id: number) => {
-      const albumData = await albumServiceLogic.getAlbumByUserId(
-        userIdParam,
-        albumId
-      );
-      setPhoto(albumData);
-    };
+  // useEffect(() => {
+  //   const fetchAlbumData = async (id: number) => {
+  //     const albumData = await albumServiceLogic.getAlbumByUserId(
+  //       userIdParam,
+  //       albumId
+  //     );
+  //     setPhoto(albumData);
+  //   };
 
-    if (albumId > 0 && userIdParam > 0) {
-      fetchAlbumData(albumId);
-    }
-  }, [albumId]);
+  //   if (albumId > 0 && userIdParam > 0) {
+  //     fetchAlbumData(albumId);
+  //   }
+  // }, [albumId]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -47,10 +47,10 @@ const PhotosForm: React.FC = () => {
         //   navigate(`/users/${userIdParam}/albums`);
         // });
       } else {
-        albumServiceLogic.createAlbum(photo).then((res) => {
-          console.log("success, photo added", res);
-          navigate(`/users/${userIdParam}/albums/`);
-        });
+        // albumServiceLogic.createAlbum(photo).then((res) => {
+        //   console.log("success, photo added", res);
+        //   navigate(`/users/${userIdParam}/albums/`);
+        // });
       }
     } else {
       alert("Form cannot be submitted with empty fields");
@@ -74,9 +74,9 @@ const PhotosForm: React.FC = () => {
         <TextField
           fullWidth
           margin="normal"
-          name="thumbnailUrl"
+          name="url"
           label="Image Url"
-          value={photo.thumbnailUrl || ""}
+          value={photo.url || ""}
           onChange={handleChange}
         />
 

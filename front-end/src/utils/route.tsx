@@ -6,6 +6,7 @@ import AlbumsPage from "../pages/Albums";
 import Photos from "../pages/Photos";
 import UserForm from "../pages/UserForm";
 import AlbumForm from "../pages/AlbumForm";
+import PhotosForm from "../pages/PhotosForm";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ export const AppRoutes: React.FC = () => {
         element={<AlbumForm />}
       />
       <Route path="/albums/:albumId/photos" element={<Photos />} />
+      <Route path="/albums/:albumId/photoForm" element={<PhotosForm />} />
     </Routes>
   );
 };

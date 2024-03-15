@@ -46,8 +46,9 @@ To run the project locally:
 
 1. Clone the repository.
 2. Navigate to the project directory.
-3. Install dependencies using `npm install`.
-4. Run the development server using `npm start`.
+3. For each repository, please ensure to enter the directory separately before running installation or other commands.
+4. Install dependencies using `npm install`.
+5. Run the development server using `npm start`.
 
 # Environment variables for BE 
 

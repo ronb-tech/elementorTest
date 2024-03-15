@@ -11,50 +11,55 @@ const AlbumForm: React.FC = () => {
   const userId = useParsedParam("userId");
 
   const [album, setAlbum] = useState<Album>({
-    _id: albumId || -1, // Assuming -1 indicates a new album
-    user_id: userId || 0, // Ensure you're correctly initializing user_id
+    _id: 0,
+    user_id: userId || 0,
     title: "",
     thumbnailUrl: "",
   });
 
   useEffect(() => {
-    if (albumId > 0) {
-      // Assuming valid IDs are positive integers
-      albumServiceLogic.getAlbumById(albumId).then(setAlbum);
+    const fetchAlbumData = async (id: number) => {
+      const albumData = await albumServiceLogic.getAlbumByUserId(
+        userId,
+        albumId
+      );
+      setAlbum(albumData);
+    };
+
+    if (albumId) {
+      fetchAlbumData(albumId);
     }
-  }, [albumId, userId]);
+  }, [albumId]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setAlbum((prevItem) => ({ ...prevItem, [name]: value }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!album.title || !album.thumbnailUrl) {
-      alert("Form cannot be submitted with empty fields");
-      return;
-    }
-
-    try {
-      if (album._id > 0) {
-        await albumServiceLogic.updateAlbum(album);
-        console.log("success, album updated");
+    console.log("Form submitted:", album);
+    if (album.title && album.thumbnailUrl) {
+      if (album._id && album._id !== -1) {
+        albumServiceLogic.updateAlbum(album).then((res) => {
+          console.log("success, album updated", res);
+          navigate(`/users/${userId}/albums`);
+        });
       } else {
-        await albumServiceLogic.createAlbum({ ...album, user_id: userId });
-        console.log("success, album added");
+        albumServiceLogic.createAlbum(album).then((res) => {
+          console.log("success, album added", res);
+          navigate(`/users/${userId}/albums/`);
+        });
       }
-      navigate(`/users/${userId}/albums`);
-    } catch (error) {
-      console.error("Form submission error:", error);
-      alert("There was a problem with the album submission.");
+    } else {
+      alert("Form cannot be submitted with empty fields");
     }
   };
 
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" component="h1">
-        {albumId > 0 ? "Edit Album" : "Add Album"}
+        {albumId ? "Edit Album" : "Add Album"}
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField

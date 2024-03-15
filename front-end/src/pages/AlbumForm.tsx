@@ -8,11 +8,12 @@ import useParsedParam from "../utils/useParsedParam";
 const AlbumForm: React.FC = () => {
   const navigate = useNavigate();
   const albumId = useParsedParam("albumId");
-  const userId = useParsedParam("userId");
+  const userIdParam = useParsedParam("userId");
+  console.log(albumId, userIdParam);
 
   const [album, setAlbum] = useState<Album>({
     _id: 0,
-    user_id: userId || 0,
+    userId: userIdParam,
     title: "",
     thumbnailUrl: "",
   });
@@ -20,13 +21,13 @@ const AlbumForm: React.FC = () => {
   useEffect(() => {
     const fetchAlbumData = async (id: number) => {
       const albumData = await albumServiceLogic.getAlbumByUserId(
-        userId,
+        userIdParam,
         albumId
       );
       setAlbum(albumData);
     };
 
-    if (albumId) {
+    if (albumId > 0 && userIdParam > 0) {
       fetchAlbumData(albumId);
     }
   }, [albumId]);
@@ -43,12 +44,12 @@ const AlbumForm: React.FC = () => {
       if (album._id && album._id !== -1) {
         albumServiceLogic.updateAlbum(album).then((res) => {
           console.log("success, album updated", res);
-          navigate(`/users/${userId}/albums`);
+          navigate(`/users/${userIdParam}/albums`);
         });
       } else {
         albumServiceLogic.createAlbum(album).then((res) => {
           console.log("success, album added", res);
-          navigate(`/users/${userId}/albums/`);
+          navigate(`/users/${userIdParam}/albums/`);
         });
       }
     } else {

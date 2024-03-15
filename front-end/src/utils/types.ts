@@ -12,7 +12,7 @@ export interface User {
 
 export interface Album {
   _id: number;
-  user_id: number;
+  userId: number;
   title: string;
   thumbnailUrl?: string;
   limit?: number;

@@ -11,8 +11,8 @@ const AlbumForm: React.FC = () => {
   const userId = useParsedParam("userId");
 
   const [album, setAlbum] = useState<Album>({
-    _id: -1,
-    user_id: userId || -1,
+    _id: 0,
+    user_id: userId || 0,
     title: "",
     thumbnailUrl: "",
   });
@@ -39,7 +39,7 @@ const AlbumForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form submitted:", album);
-    if (album.title) {
+    if (album.title && album.thumbnailUrl) {
       if (album._id && album._id !== -1) {
         albumServiceLogic.updateAlbum(album).then((res) => {
           console.log("success, album updated", res);

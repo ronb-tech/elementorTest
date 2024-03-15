@@ -96,7 +96,7 @@ const AlbumsPage: React.FC = () => {
       <h3>You have {albums.length} albums</h3>
       <AddItems text="album" addItems={onAddAlbum} />
       {albums.length > 0 ? (
-        <>
+        <div>
           <DeleteDialog
             open={deleteDialogOpen}
             itemId={itemIdToDelete}
@@ -110,7 +110,7 @@ const AlbumsPage: React.FC = () => {
             onDeleteItem={onAlbumDelete}
             onEditItem={onAlbumEdit}
           />
-        </>
+        </div>
       ) : (
         <div>not found results</div>
       )}

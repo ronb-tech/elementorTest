@@ -38,6 +38,27 @@ export const getAllAlbumsByUserId = async (req: Request, res: Response) => {
   }
 };
 
+export const addAlbum = async (req: Request, res: Response) => {
+  const albumData = req.body;
+  if (!albumData) {
+    return res.status(400).send({ message: "User data is missing", ok: false });
+  }
+
+  addItem({
+    ...mapHandles.albums.allAlbums,
+    item: albumData,
+  })
+    .then((response) => {
+      if (response.ok) {
+        res.status(201).send({ response });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send({ message: "Server error", ok: false });
+    });
+};
+
 export const updateAlbum = async (req: Request, res: Response) => {
   const updateData = req?.body;
   if (!updateData && !updateData._id) {

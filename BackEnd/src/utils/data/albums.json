@@ -46,8 +46,9 @@
   },
   {
     "userId": 2,
-    "title": "quam nostrum impedit mollitia quod et dolor",
-    "_id": 11
+    "title": "fdsdsfdf",
+    "_id": 11,
+    "thumbnailUrl": "https://picsum.photos/id/501/300/300"
   },
   {
     "userId": 2,
@@ -63,11 +64,6 @@
     "userId": 2,
     "title": "voluptatem aut maxime inventore autem magnam atque repellat",
     "_id": 16
-  },
-  {
-    "userId": 2,
-    "title": "aut minima voluptatem ut velit",
-    "_id": 17
   },
   {
     "userId": 2,

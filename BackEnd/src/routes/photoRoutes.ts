@@ -7,7 +7,7 @@ import {
 
 const photosRoutes = express.Router();
 photosRoutes.get("/:album_id", getPhotos);
-photosRoutes.put("/update", deletePhotoById);
+photosRoutes.delete("/delete/:id", deletePhotoById);
 photosRoutes.post("/create", addPhoto);
 
 export default photosRoutes;

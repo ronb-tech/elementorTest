@@ -56,3 +56,31 @@ export const addPhoto = async (req: Request, res: Response) => {
     res.status(500).send({ message: "Server error", ok: false });
   }
 };
+export const deletePhotoById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const photos = await fetchData<Photo>({
+    ...mapHandles.photos.allImages,
+  });
+  const photo = photos.find((photo) => photo._id.toString() === id);
+
+  if (photo) {
+    try {
+      const response = await deleteItem({
+        ...mapHandles.photos.allImages,
+        itemId: photo._id,
+      });
+      if (response) {
+        res
+          .status(200)
+          .send({ message: "Photo deleted successfully", ok: true });
+      } else {
+        throw new Error("Failed to delete photo");
+      }
+    } catch (error) {
+      console.error("Failed to delete photo:", error);
+      res.status(404).send({ message: "Photo not found", ok: false });
+    }
+  } else {
+    res.status(404).send({ message: "Photo not found", ok: false });
+  }
+};

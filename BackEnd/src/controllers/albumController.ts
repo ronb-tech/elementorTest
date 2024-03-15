@@ -5,6 +5,7 @@ import {
   deleteItem,
   updateItem,
   addItem,
+  fetchData,
   mapHandles,
 } from "../models/dataHandler";
 
@@ -66,8 +67,11 @@ export const updateAlbum = async (req: Request, res: Response) => {
 
 export const deleteAlbumById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const albums: Album[] = await getAlbumsByUserIdData(parseInt(id, 10));
-  const album = await albums.find((album) => album._id.toString() === id);
+  const albums: Album[] = await fetchData<Album>({
+    ...mapHandles.albums.allAlbums,
+  });
+  const album = albums.find((album) => album._id.toString() === id);
+
   if (album) {
     deleteItem({
       ...mapHandles.albums.allAlbums,

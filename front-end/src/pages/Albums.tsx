@@ -56,7 +56,7 @@ const AlbumsPage: React.FC = () => {
   const handleConfirmDelete = async () => {
     if (itemIdToDelete !== null) {
       try {
-        const isDeleted = await albumServiceLogic.deleteAlbum(itemIdToDelete); // Ensure this method is implemented in your service logic
+        const isDeleted = await albumServiceLogic.deleteAlbum(itemIdToDelete);
         if (isDeleted) {
           setAlbums((currentAlbums) =>
             currentAlbums.filter((album) => album._id !== itemIdToDelete)

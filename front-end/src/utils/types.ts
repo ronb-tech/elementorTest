@@ -20,7 +20,7 @@ export interface Album {
 
 export interface Photo {
   _id: number;
-  album_id: number;
+  albumId: number;
   title: string;
   url?: string;
   thumbnailUrl?: string;

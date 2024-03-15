@@ -9,6 +9,13 @@
     align-items: center;
     gap: $spacing-lg;
 
+    .card-actions-items button[aria-label="edit"] {
+        display: none;
+    }
+
+
+
+
     .page-photos-top {}
 
     .modal-carousel {

@@ -9,7 +9,7 @@ const PhotosForm: React.FC = () => {
 
   const [photo, setPhoto] = useState<Photo>({
     _id: 0,
-    album_id: 0,
+    albumId: 0,
     title: "",
     url: "",
   });
@@ -23,7 +23,7 @@ const PhotosForm: React.FC = () => {
     event.preventDefault();
     console.log("Form submitted:", photo);
 
-    if (photo.title && photo.url && photo.album_id > 0) {
+    if (photo.title && photo.url && photo.albumId > 0) {
       photoServiceLogic.createPhoto(photo).then((res) => {
         if (res.ok) {
           console.log("success, photo added", res);
@@ -62,10 +62,10 @@ const PhotosForm: React.FC = () => {
         <TextField
           fullWidth
           margin="normal"
-          name="album_id"
+          name="albumId"
           label="Album Id"
           type="number"
-          value={photo.album_id.toString()}
+          value={photo.albumId.toString()}
           onChange={handleChange}
           inputProps={{
             step: "1",

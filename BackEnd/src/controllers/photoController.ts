@@ -21,9 +21,7 @@ export const getPhotos = async (req: Request, res: Response) => {
     photos = await fetchData<Photo>({
       ...mapHandles.photos.allImages,
     });
-    const photosByAlbumId = photos.filter(
-      (photo) => photo.albumId === album_id
-    );
+    const photosByAlbumId = photos.filter((photo) => photo.albumId == album_id);
     res.json(photosByAlbumId || []);
   } catch (error) {
     console.error("Failed to fetch photos:", error);

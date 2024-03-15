@@ -43,7 +43,7 @@ const AlbumForm: React.FC = () => {
       if (album._id && album._id !== -1) {
         albumServiceLogic.updateAlbum(album).then((res) => {
           console.log("success, album updated", res);
-          navigate(`/users/${albumId}/albums`);
+          navigate(`/users/${userId}/albums`);
         });
       } else {
         albumServiceLogic.createAlbum(album).then((res) => {

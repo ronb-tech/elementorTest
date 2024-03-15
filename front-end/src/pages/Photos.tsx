@@ -9,8 +9,11 @@ import "../layout/assets/style/photos.scss";
 import { AddItems } from "../components/AddItems";
 import DeleteDialog from "../components/DialogDelete";
 import useParsedParam from "../utils/useParsedParam";
+import { useNavigate } from "react-router-dom";
 
 const Photos: React.FC = () => {
+  const navigate = useNavigate();
+
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -47,23 +50,43 @@ const Photos: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const onAddPhoto = (): void => {};
+  const onAddPhoto = (): void => {
+    navigate(`/albums/photoForm`);
+  };
+
   const onPhotoDelete = (photoId: number): void => {
-    console.log("onPhotoDelete", photoId);
     setDeleteDialogOpen(true);
 
-    // const albumToDelete = albums.find((album) => album._id === albumId);
-    // if (albumToDelete) {
-    //   setAlbumName(albumToDelete.title);
-    //   setItemIdToDelete(albumId);
-    // }
+    const photoToDelete = photos.find((photo) => photo._id === photoId);
+    if (photoToDelete) {
+      console.log("onPhotoDelete", photoId);
+      setItemIdToDelete(albumId);
+    }
   };
 
   const handleCloseDeleteDialog = () => {
     setDeleteDialogOpen(false);
   };
 
-  const handleConfirmDelete = async () => {};
+  const handleConfirmDelete = async () => {
+    if (itemIdToDelete !== null) {
+      try {
+        const isDeleted = await photoServiceLogic.deletePhoto(itemIdToDelete);
+        if (isDeleted) {
+          setPhotos((currentPhotos) =>
+            currentPhotos.filter((photo) => photo._id !== itemIdToDelete)
+          );
+          handleCloseDeleteDialog();
+          console.log(
+            `Photo with ID ${itemIdToDelete} was successfully deleted.`
+          );
+        }
+      } catch (err) {
+        handleCloseDeleteDialog();
+        console.error("Failed to delete photo:", err);
+      }
+    }
+  };
 
   if (isLoading) return <SkeletonCard loading={true} numberOfItems={6} />;
   if (error) return <div>Error: {error}</div>;

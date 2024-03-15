@@ -49,6 +49,18 @@ To run the project locally:
 3. Install dependencies using `npm install`.
 4. Run the development server using `npm start`.
 
+# Environment variables for BE 
+
+PORT=4000
+MONGODB_URI=mongodb://localhost:27017/yourdbname
+JSONPLACEHOLDER_URL=https://jsonplaceholder.typicode.com/
+PICSUM_URL=https://picsum.photos/id/
+USE_MONGODB=false
+
+# Environment variables for FE 
+REACT_APP_BASE_URL=http://localhost:4000/api/
+
+
 ## Credits
 
 This project utilizes components from [Material-UI](https://material-ui.com/).

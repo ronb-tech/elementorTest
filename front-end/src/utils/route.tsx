@@ -21,7 +21,7 @@ export const AppRoutes: React.FC = () => {
         element={<AlbumForm />}
       />
       <Route path="/albums/:albumId/photos" element={<Photos />} />
-      <Route path="/albums/:albumId/photoForm" element={<PhotosForm />} />
+      <Route path="/albums/photoForm" element={<PhotosForm />} />
     </Routes>
   );
 };

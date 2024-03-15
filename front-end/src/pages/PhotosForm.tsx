@@ -13,7 +13,7 @@ const PhotosForm: React.FC = () => {
 
   const [photo, setPhoto] = useState<Photo>({
     _id: 0,
-    album_id: albumId,
+    album_id: 0,
     title: "",
     url: "",
   });
@@ -40,7 +40,7 @@ const PhotosForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form submitted:", photo);
-    if (photo.title && photo.thumbnailUrl) {
+    if (photo.title && photo.thumbnailUrl && photo.album_id > 0) {
       if (photo._id && photo._id !== -1) {
         // albumServiceLogic.updateAlbum(photo).then((res) => {
         //   console.log("success, photo updated", res);
@@ -78,6 +78,18 @@ const PhotosForm: React.FC = () => {
           label="Image Url"
           value={photo.url || ""}
           onChange={handleChange}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          name="album_id"
+          label="Album Id"
+          type="number"
+          value={photo.album_id.toString()}
+          onChange={handleChange}
+          inputProps={{
+            step: "1",
+          }}
         />
 
         <Button

@@ -156,7 +156,7 @@ export async function deleteItem<T extends Document>({
     items = items.filter((item) => item._id !== itemId);
     try {
       const removeOpertion = await writeJsonFile(filePath, items);
-      return items.length < initialLength;
+      return true;
     } catch (error) {
       return false;
     }

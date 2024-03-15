@@ -60,7 +60,7 @@ const Photos: React.FC = () => {
     const photoToDelete = photos.find((photo) => photo._id === photoId);
     if (photoToDelete) {
       console.log("onPhotoDelete", photoId);
-      setItemIdToDelete(albumId);
+      setItemIdToDelete(photoId);
     }
   };
 

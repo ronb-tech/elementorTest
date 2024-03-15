@@ -43,11 +43,14 @@ export const ActionItems: React.FC<ActionItemsProps> = ({
 
   return (
     <div className="card-actions-items" onClick={stopPropagationForDiv}>
-      <Checkbox
-        checked={isSelected}
-        onChange={() => onToggleSelect(itemId)}
-        inputProps={{ "aria-label": "select item" }}
-      />
+      {isSelected && (
+        <Checkbox
+          checked={isSelected}
+          onChange={() => onToggleSelect(itemId)}
+          inputProps={{ "aria-label": "select item" }}
+        />
+      )}
+
       {actions.map((action, index) => (
         <IconButton
           key={index}

@@ -9,9 +9,10 @@
   {
     "_id": 4,
     "name": "Patricia Lebsack",
-    "username": "Karianne",
+    "username": "Kariannea",
     "email": "Julianne.OConner@kory.org",
-    "avatarUrl": "https://robohash.org/4?set=set1"
+    "avatarUrl": "https://robohash.org/4?set=set1",
+    "albumCount": 10
   },
   {
     "_id": 5,

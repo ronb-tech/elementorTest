@@ -17,6 +17,13 @@ class AlbumService {
     return await response.json();
   }
 
+  async getAlbumByUserId(user_id: number, albumId: number) {
+    const response = await fetch(
+      `${this.baseUrl}?user_id=${user_id}&album_id=${albumId}`
+    );
+    return await response.json();
+  }
+
   async createAlbum(album: Album) {
     const response = await fetch(`${this.baseUrl}/create`, {
       method: "POST",

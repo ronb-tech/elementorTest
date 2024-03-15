@@ -19,7 +19,10 @@ const AlbumForm: React.FC = () => {
 
   useEffect(() => {
     const fetchAlbumData = async (id: number) => {
-      const albumData = await albumServiceLogic.getAlbumById(id);
+      const albumData = await albumServiceLogic.getAlbumByUserId(
+        userId,
+        albumId
+      );
       setAlbum(albumData);
     };
 

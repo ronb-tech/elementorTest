@@ -59,12 +59,15 @@ export const getAllPhotos = async (): Promise<Photo[]> => {
     const imageDeafultSize = 600;
     const imageThumbSize = 300;
 
-    const photosFormat = photos.map(({ id, ...rest }: any) => ({
-      ...rest,
-      _id: id,
-      url: `${imagePath}${id}/${imageDeafultSize}/${imageDeafultSize}`,
-      thumbnailUrl: `${imagePath}${id}/${imageThumbSize}/${imageThumbSize}`,
-    }));
+    const photosFormat = photos.map(({ id, ...rest }: any) => {
+      const imgurlId = id > 1000 ? Math.floor(Math.random() * 1000) + 1 : id;
+      return {
+        ...rest,
+        _id: id,
+        url: `${imagePath}${imgurlId}/${imageDeafultSize}/${imageDeafultSize}`,
+        thumbnailUrl: `${imagePath}${imgurlId}/${imageThumbSize}/${imageThumbSize}`,
+      };
+    });
 
     return photosFormat;
   } catch (err) {

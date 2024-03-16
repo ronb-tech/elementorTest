@@ -7,10 +7,17 @@ export const getAllUsersData = async (): Promise<User[]> => {
   let users: User[] = [];
   let albums: Album[] = [];
 
-  try {
-    //just for the example for getting from mongoDB
-    const usersFromMongo: User[] = await UserModel.find().lean();
+  //just for the example for getting from mongoDB
+  UserModel.find()
+    .lean()
+    .then((users) => {
+      console.log("users from mongo", users);
+    })
+    .catch((err) => {
+      console.log("error from mongo", err);
+    });
 
+  try {
     users = await fetchData(mapHandles.users.allUsers);
   } catch (error) {
     throw new Error("Failed to load user data");

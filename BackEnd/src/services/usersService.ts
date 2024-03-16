@@ -2,19 +2,38 @@ import { User, Album, Photo } from "../models/types";
 import { fetchData, mapHandles } from "../models/dataHandler";
 
 import UserModel from "../models/userModel";
+import AlbumModel from "../models/albumModel";
 
 export const getAllUsersData = async (): Promise<User[]> => {
   let users: User[] = [];
   let albums: Album[] = [];
 
   //just for the example for getting from mongoDB
-  UserModel.find()
-    .lean()
-    .then((users) => {
-      console.log("users from mongo", users);
+  UserModel.aggregate([
+    {
+      $lookup: {
+        from: "albums",
+        localField: "_id",
+        foreignField: "userId",
+        as: "albums",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        username: 1,
+        email: 1,
+        avatarUrl: 1,
+        albumsCount: { $size: "$albums" },
+      },
+    },
+  ])
+    .then((usersWithAlbumsCount) => {
+      console.log("Users with their albums count:", usersWithAlbumsCount);
     })
     .catch((err) => {
-      console.log("error from mongo", err);
+      console.error("Error fetching users with their albums count:", err);
     });
 
   try {
